@@ -1,0 +1,94 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\css\upload\author.jpg" />
+    <Content Remove="wwwroot\css\upload\author_01.jpg" />
+    <Content Remove="wwwroot\css\upload\author_02.jpg" />
+    <Content Remove="wwwroot\css\upload\author_03.jpg" />
+    <Content Remove="wwwroot\css\upload\banner_01.jpg" />
+    <Content Remove="wwwroot\css\upload\banner_02.jpg" />
+    <Content Remove="wwwroot\css\upload\banner_03.jpg" />
+    <Content Remove="wwwroot\css\upload\banner_04.jpg" />
+    <Content Remove="wwwroot\css\upload\banner_05.jpg" />
+    <Content Remove="wwwroot\css\upload\banner_06.jpg" />
+    <Content Remove="wwwroot\css\upload\banner_07.jpg" />
+    <Content Remove="wwwroot\css\upload\cta.jpg" />
+    <Content Remove="wwwroot\css\upload\cta_01.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_cat_01.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_cat_02.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_cat_03.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_single_01.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_single_02.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_single_03.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_sq_01.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_sq_02.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_sq_03.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_sq_04.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_sq_05.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_sq_06.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_sq_07.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_sq_08.jpg" />
+    <Content Remove="wwwroot\css\upload\garden_sq_09.jpg" />
+    <Content Remove="wwwroot\css\upload\insta_01.jpeg" />
+    <Content Remove="wwwroot\css\upload\insta_02.jpeg" />
+    <Content Remove="wwwroot\css\upload\insta_03.jpeg" />
+    <Content Remove="wwwroot\css\upload\insta_04.jpeg" />
+    <Content Remove="wwwroot\css\upload\insta_05.jpeg" />
+    <Content Remove="wwwroot\css\upload\insta_06.jpeg" />
+    <Content Remove="wwwroot\css\upload\insta_07.jpeg" />
+    <Content Remove="wwwroot\css\upload\insta_08.jpeg" />
+    <Content Remove="wwwroot\css\upload\insta_09.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\upload\author.jpg" />
+    <None Include="wwwroot\css\upload\author_01.jpg" />
+    <None Include="wwwroot\css\upload\author_02.jpg" />
+    <None Include="wwwroot\css\upload\author_03.jpg" />
+    <None Include="wwwroot\css\upload\banner_01.jpg" />
+    <None Include="wwwroot\css\upload\banner_02.jpg" />
+    <None Include="wwwroot\css\upload\banner_03.jpg" />
+    <None Include="wwwroot\css\upload\banner_04.jpg" />
+    <None Include="wwwroot\css\upload\banner_05.jpg" />
+    <None Include="wwwroot\css\upload\banner_06.jpg" />
+    <None Include="wwwroot\css\upload\banner_07.jpg" />
+    <None Include="wwwroot\css\upload\cta.jpg" />
+    <None Include="wwwroot\css\upload\cta_01.jpg" />
+    <None Include="wwwroot\css\upload\garden_cat_01.jpg" />
+    <None Include="wwwroot\css\upload\garden_cat_02.jpg" />
+    <None Include="wwwroot\css\upload\garden_cat_03.jpg" />
+    <None Include="wwwroot\css\upload\garden_single_01.jpg" />
+    <None Include="wwwroot\css\upload\garden_single_02.jpg" />
+    <None Include="wwwroot\css\upload\garden_single_03.jpg" />
+    <None Include="wwwroot\css\upload\garden_sq_01.jpg" />
+    <None Include="wwwroot\css\upload\garden_sq_02.jpg" />
+    <None Include="wwwroot\css\upload\garden_sq_03.jpg" />
+    <None Include="wwwroot\css\upload\garden_sq_04.jpg" />
+    <None Include="wwwroot\css\upload\garden_sq_05.jpg" />
+    <None Include="wwwroot\css\upload\garden_sq_06.jpg" />
+    <None Include="wwwroot\css\upload\garden_sq_07.jpg" />
+    <None Include="wwwroot\css\upload\garden_sq_08.jpg" />
+    <None Include="wwwroot\css\upload\garden_sq_09.jpg" />
+    <None Include="wwwroot\css\upload\insta_01.jpeg" />
+    <None Include="wwwroot\css\upload\insta_02.jpeg" />
+    <None Include="wwwroot\css\upload\insta_03.jpeg" />
+    <None Include="wwwroot\css\upload\insta_04.jpeg" />
+    <None Include="wwwroot\css\upload\insta_05.jpeg" />
+    <None Include="wwwroot\css\upload\insta_06.jpeg" />
+    <None Include="wwwroot\css\upload\insta_07.jpeg" />
+    <None Include="wwwroot\css\upload\insta_08.jpeg" />
+    <None Include="wwwroot\css\upload\insta_09.jpeg" />
+    <None Include="wwwroot\js\site.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+  </ItemGroup>
+
+</Project>
