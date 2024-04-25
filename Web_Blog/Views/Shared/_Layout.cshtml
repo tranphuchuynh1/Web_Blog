@@ -17,7 +17,7 @@
 <!-- Site Icons -->
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <!-- Design fonts -->
 <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
 
@@ -44,8 +44,39 @@
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <style>
-   
+            .dropdown-menu.show {
+                display: block;
+            }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-top: none; 
+        }
+
+            .dropdown-menu li {
+                background-color: #fff; /* Màu nền mặc định */
+                color: #000; /* Màu chữ mặc định */
+                padding: 10px;
+            }
+
+                .dropdown-menu li:hover {
+                    background-color: green; /* Màu nền khi di chuột vào */
+                    color: #fff; /* Màu chữ khi di chuột vào */
+                }
+
+        .nav-item {
+            position: relative; /* Đảm bảo .dropdown-menu được định vị tương đối với .nav-item */
+        }
+
 </style>
+   
+
 </head>
 <body>
 
@@ -96,28 +127,32 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Forest Timemenu" aria-controls="Forest Timemenu" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse justify-content-md-center" id="Forest Timemenu">
-                        <ul class="navbar-nav" >
+                    <div class="collapse navbar-collapse justify-content-md-center" id="ForestTimemenu">
+                        <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link color-green-hover" href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" asp-area="" asp-controller="Technology" asp-action="PageTechnology">Technology</a>
+                                <div class="nav-link color-green-hover category-toggle">Category <i style="padding-left:5px;" class="fa-solid fa-angle-down"></i></div>
+                                <ul class="dropdown-menu">
+                                    <li id="menu"><a href="#">Fashion</a></li>
+                                    <li id="menu"><a href="#">InLiving</a></li>
+                                    <li id="menu"><a href="#">Technology</a></li>
+                                    <li id="menu"><a href="#">Tourism</a></li>
+                                </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" asp-area="" asp-controller="Tourism" asp-action="PageTourism">Tourism</a>
+                                <a class="nav-link color-green-hover" href="#">Notification</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" asp-area="" asp-controller="InLiving" asp-action="PageInLiving">In Living</a>
+                                <a class="nav-link color-green-hover" href="#">Contact</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" asp-area="" asp-controller="Fashion" asp-action="PageFashion">Fashion</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link color-green-hover" asp-area="" asp-controller="Contact" asp-action="PageContact">Contact</a>
+                                <a class="nav-link color-green-hover" href="#">Profile</a>
                             </li>
                         </ul>
                     </div>
+
                 </nav>
             </div><!-- end container -->
         </header><!-- end header -->
@@ -184,6 +219,11 @@
     <script src="~/js/tether.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/custom.js"></script>
-
+    <script>
+        document.querySelector('.category-toggle').addEventListener('click', function () {
+            var dropdownMenu = this.closest('.nav-item').querySelector('.dropdown-menu');
+            dropdownMenu.classList.toggle('show');
+        });
+    </script>
 </body>
 </html>
