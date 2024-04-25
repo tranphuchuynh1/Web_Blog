@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Web_Blog.Models;
@@ -12,12 +13,15 @@ namespace Web_Blog.Controllers
         {
             _logger = logger;
         }
-
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
-
+        public IActionResult Login()
+        {
+            return Redirect("https://localhost:44338/Identity/Account/Login?ReturnUrl=%2F");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
