@@ -35,16 +35,39 @@
 
 <!-- Colors for this template -->
 <link href="~/css/colors.css" rel="stylesheet">
-
 <!-- Version Garden CSS for this template -->
 <link href="~/css/version/garden.css" rel="stylesheet">
-
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+<!--CSS Swiper-->
 <style>
-   
+        #slideshow {
+            position: relative;
+            width: 100%;
+            max-width: 900px; /* Điều chỉnh kích thước của slideshow */
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+            .slides figure {
+                width: 20%; /* Mỗi ảnh chiếm 20% chiều rộng của container */
+                text-align: center;
+            }
+
+            .slides img {
+                width: 70%; /* Kích thước đầy đủ của ảnh */
+                height: auto;
+                margin-right:3%;
+                border-radius: 50%; /* Để ảnh trở thành hình tròn */
+            }
+
 </style>
 </head>
 <body>
@@ -59,7 +82,6 @@
                         <div class="topsocial">
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google+"><i class="fa fa-google-plus"></i></a>
@@ -144,22 +166,14 @@
                     <div class="col-lg-8 offset-lg-2">
                         <div class="widget">
                             <div class="footer-text text-center">
-                                <p>Forest Time is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
+                                <p style="font-size: 16px;">Web Blog is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
                                 <div class="social">
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook";"><i class="fa fa-facebook"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google Plus"><i class="fa fa-google-plus"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
                                 </div>
-
-                                <hr class="invis">
-
                                 <div class="newsletter-widget text-center">
-                                    <form class="form-inline">
-                                        <input type="text" class="form-control" placeholder="Enter your email address">
-                                        <button type="submit" class="btn btn-primary">Subscribe <i class="fa fa-envelope-open-o"></i></button>
-                                    </form>
                                 </div><!-- end newsletter -->
                             </div><!-- end footer-text -->
                         </div><!-- end widget -->
@@ -170,7 +184,8 @@
                     <div class="col-md-12 text-center">
                         <br>
                         <br>
-                        <div class="copyright">&copy; Forest Time. Design: <a href="http://html.design">HTML Design</a>.</div>
+                        <hr style="width: auto; border-top: 1px solid #ccc; margin: auto;margin-bottom:10px"> <!-- Thanh ngang -->
+                        <div class="copyright">&copy; Web Blog. Design: <a href="https://yersin.edu.vn/">CNTT-K19</a>.</div>
                     </div>
                 </div>
             </div><!-- end container -->
@@ -185,6 +200,29 @@
     <script src="~/js/tether.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/custom.js"></script>
+    <script>
 
+        let slideIndex = 0;
+        const slides = document.querySelector('#slideshow .slides');
+        const images = document.querySelectorAll('#slideshow .slides img');
+        const imageWidth = images[0].clientWidth;
+
+        showSlides();
+
+        function showSlides() {
+            slideIndex++;
+            slides.style.transform = `translateX(-${slideIndex * imageWidth}px)`;
+
+            if (slideIndex === images.length) {
+                slideIndex = 0;
+                setTimeout(() => slides.style.transition = 'none', 500); // Tạm thời loại bỏ hiệu ứng chuyển đổi
+                setTimeout(() => slides.style.transform = `translateX(0)`, 600); // Quay lại ảnh đầu tiên
+                setTimeout(() => slides.style.transition = 'transform 0.5s ease', 700); // Khôi phục hiệu ứng chuyển đổi
+            }
+
+            setTimeout(showSlides, 2000); // Thay đổi 2000 nếu bạn muốn thay đổi tốc độ chuyển đổi
+        }
+
+    </script>
 </body>
 </html>
