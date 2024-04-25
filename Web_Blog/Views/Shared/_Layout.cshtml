@@ -17,7 +17,7 @@
 <!-- Site Icons -->
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <!-- Design fonts -->
 <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
 
@@ -68,20 +68,50 @@
                 border-radius: 50%; /* Để ảnh trở thành hình tròn */
             }
 
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-top: none; /* Loại bỏ đường viền trên của danh sách */
+        }
+
+        .nav-item {
+            position: relative; /* Đảm bảo .dropdown-menu được định vị tương đối với .nav-item */
+        }
+
+        .dropdown-menu li {
+            background-color: #fff; /* Màu nền mặc định */
+            color: #000; /* Màu chữ mặc định */
+            padding: 10px;
+        }
+
+            .dropdown-menu li:hover {
+                background-color: green; /* Màu nền khi di chuột vào */
+                color: #fff; /* Màu chữ khi di chuột vào */
+            }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
 </style>
 </head>
 <body>
-
     <div id="wrapper">
-        
 
-        <div class="topbar-section" >
+
+        <div class="topbar-section">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-sm-6 hidden-xs-down">
                         <div class="topsocial">
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google+"><i class="fa fa-google-plus"></i></a>
@@ -105,8 +135,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="logo" style="text-align:center !important;">
-                            <a  href="garden-index.html"><img src="" alt="">LOGO NHÓM Ở ĐÂY</a>
-                            <a href="garden-index.html"><img src="" alt="">LOGO NHÓM Ở ĐÂY hehe</a>
+                            <a href="garden-index.html"><img src="" alt="">LOGO NHÓM Ở ĐÂY</a>
                         </div><!-- end logo -->
                     </div>
                 </div><!-- end row -->
@@ -119,28 +148,31 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Forest Timemenu" aria-controls="Forest Timemenu" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse justify-content-md-center" id="Forest Timemenu">
-                        <ul class="navbar-nav" >
+                    <div class="collapse navbar-collapse justify-content-md-center" id="ForestTimemenu">
+                        <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link color-green-hover" href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" asp-area="" asp-controller="Technology" asp-action="PageTechnology">Technology</a>
+                                <div class="nav-link color-green-hover category-toggle">Category <i style="padding-left:5px;" class="fa-solid fa-angle-down"></i></div>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Option 1</a></li>
+                                    <li><a href="#">Option 2</a></li>
+                                    <li><a href="#">Option 3</a></li>
+                                </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" asp-area="" asp-controller="Tourism" asp-action="PageTourism">Tourism</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link color-green-hover" asp-area="" asp-controller="InLiving" asp-action="PageInLiving">In Living</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link color-green-hover" asp-area="" asp-controller="Fashion" asp-action="PageFashion">Fashion</a>
+                                <a class="nav-link color-green-hover" href="#">Notification</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link color-green-hover" asp-area="" asp-controller="Contact" asp-action="PageContact">Contact</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link color-green-hover" href="#">Profile</a>
+                            </li>
                         </ul>
                     </div>
+
                 </nav>
             </div><!-- end container -->
         </header><!-- end header -->
@@ -222,7 +254,12 @@
 
             setTimeout(showSlides, 2000); // Thay đổi 2000 nếu bạn muốn thay đổi tốc độ chuyển đổi
         }
-
+         
     </script>
+    <script>
+    document.querySelector('.category-toggle').addEventListener('click', function () {
+    var dropdownMenu = this.closest('.nav-item').querySelector('.dropdown-menu');
+    dropdownMenu.classList.toggle('show');
+        });</script>
 </body>
 </html>
