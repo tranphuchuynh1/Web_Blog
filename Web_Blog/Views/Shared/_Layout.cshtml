@@ -17,7 +17,7 @@
 <!-- Site Icons -->
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <!-- Design fonts -->
 <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
 
@@ -35,13 +35,14 @@
 
 <!-- Colors for this template -->
 <link href="~/css/colors.css" rel="stylesheet">
+
 <!-- Version Garden CSS for this template -->
 <link href="~/css/version/garden.css" rel="stylesheet">
+
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<!--CSS Swiper-->
 <style>
         #slideshow {
             position: relative;
@@ -99,12 +100,15 @@
         }
 
 </style>
+   
+
 </head>
 <body>
+
     <div id="wrapper">
+        
 
-
-        <div class="topbar-section">
+        <div class="topbar-section" >
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-sm-6 hidden-xs-down">
@@ -135,7 +139,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="logo" style="text-align:center !important;">
-                            <a href="garden-index.html"><img src="" alt="">LOGO NHÓM Ở ĐÂY</a>
+                            <a  href="garden-index.html"><img style="border-radius:100px;" src="/css/upload/Screenshot 2024-04-25 212607.png" /></a>
                         </div><!-- end logo -->
                     </div>
                 </div><!-- end row -->
@@ -151,16 +155,18 @@
                     <div class="collapse navbar-collapse justify-content-md-center" id="ForestTimemenu">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" href="#">Home</a>
+                                <a class="nav-link color-green-hover" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
-                                <div class="nav-link color-green-hover category-toggle">Category <i style="padding-left:5px;" class="fa-solid fa-angle-down"></i></div>
+                                <div class="nav-link color-green-hover category-toggle">Category <i style="padding-left:5px;" class="fa-solid fa-angle-down arrow-icon"></i></div>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Option 1</a></li>
-                                    <li><a href="#">Option 2</a></li>
-                                    <li><a href="#">Option 3</a></li>
+                                    <li><a href="#">In Living</a></li>
+                                    <li><a href="#">Tourism</a></li>
+                                    <li><a href="#">Technology</a></li>
+                                    <li><a href="#">Fashion</a></li>
                                 </ul>
                             </li>
+
                             <li class="nav-item">
                                 <a class="nav-link color-green-hover" href="#">Notification</a>
                             </li>
@@ -198,14 +204,22 @@
                     <div class="col-lg-8 offset-lg-2">
                         <div class="widget">
                             <div class="footer-text text-center">
-                                <p style="font-size: 16px;">Web Blog is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
+                                <p>Forest Time is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
                                 <div class="social">
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook";"><i class="fa fa-facebook"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google Plus"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
                                 </div>
+
+                                <hr class="invis">
+
                                 <div class="newsletter-widget text-center">
+                                    <form class="form-inline">
+                                        <input type="text" class="form-control" placeholder="Enter your email address">
+                                        <button type="submit" class="btn btn-primary">Subscribe <i class="fa fa-envelope-open-o"></i></button>
+                                    </form>
                                 </div><!-- end newsletter -->
                             </div><!-- end footer-text -->
                         </div><!-- end widget -->
@@ -216,8 +230,7 @@
                     <div class="col-md-12 text-center">
                         <br>
                         <br>
-                        <hr style="width: auto; border-top: 1px solid #ccc; margin: auto;margin-bottom:10px"> <!-- Thanh ngang -->
-                        <div class="copyright">&copy; Web Blog. Design: <a href="https://yersin.edu.vn/">CNTT-K19</a>.</div>
+                        <div class="copyright">&copy; Forest Time. Design: <a href="http://html.design">HTML Design</a>.</div>
                     </div>
                 </div>
             </div><!-- end container -->
@@ -254,12 +267,12 @@
 
             setTimeout(showSlides, 2000); // Thay đổi 2000 nếu bạn muốn thay đổi tốc độ chuyển đổi
         }
-         
     </script>
     <script>
-    document.querySelector('.category-toggle').addEventListener('click', function () {
-    var dropdownMenu = this.closest('.nav-item').querySelector('.dropdown-menu');
-    dropdownMenu.classList.toggle('show');
-        });</script>
+        document.querySelector('.arrow-icon').addEventListener('click', function () {
+            var dropdownMenu = this.closest('.nav-item').querySelector('.dropdown-menu');
+            dropdownMenu.classList.toggle('show');
+        });
+    </script>
 </body>
 </html>
