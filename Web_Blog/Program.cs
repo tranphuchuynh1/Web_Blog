@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 
 
 // Register database
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext<WebblogDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();
 

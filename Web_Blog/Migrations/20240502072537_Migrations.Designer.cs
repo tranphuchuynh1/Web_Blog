@@ -10,7 +10,7 @@ using Web_Blog.Data;
 
 namespace Web_Blog.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(WebblogDbContext))]
     [Migration("20240502072537_Migrations")]
     partial class Migrations
     {
