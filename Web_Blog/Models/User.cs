@@ -11,7 +11,6 @@ namespace Web_Blog.Models
         public string? password { get; set; }
 
         public string? Email { get; set; }
-        public byte[]?  Avartar { get; set; }
 
     }
 }
