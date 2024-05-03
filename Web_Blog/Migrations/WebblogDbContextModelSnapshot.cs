@@ -10,7 +10,7 @@ using Web_Blog.Data;
 namespace Web_Blog.Migrations
 {
     [DbContext(typeof(WebblogDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    partial class WebblogDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -29,10 +29,6 @@ namespace Web_Blog.Migrations
                         .HasColumnOrder(1);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idUser"));
-
-                    b.Property<byte[]>("Avartar")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()

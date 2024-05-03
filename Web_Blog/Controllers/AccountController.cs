@@ -36,12 +36,18 @@ namespace Web_Blog.Controllers
         {
             if (HttpContext.Session.GetInt32("idUser") != null)
             {
+                // Lấy tên người dùng từ Session
+                string userName = HttpContext.Session.GetString("username");
+
+                // Gán tên người dùng vào ViewBag để truyền sang view
+                ViewBag.UserName = userName;
                 return View();
             }
             else
             {
                 return RedirectToAction("Login");
             }
+           
         }
         public ActionResult Register()
         {
@@ -87,25 +93,36 @@ namespace Web_Blog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string email, string password)
         {
+            
             if (ModelState.IsValid)
             {
                 var f_password = GetMD5(password);
-                var data = _db.Users.Where(s => s.Email.Equals(email) && s.Password.Equals(f_password)).ToList();
-                if (data.Count() > 0)
+                var data = _db.Users.FirstOrDefault(s => s.Email.Equals(email) && s.Password.Equals(f_password));
+                if (data != null)
                 {
                     // Thêm thông tin vào Session
-                    HttpContext.Session.SetString("username", data.FirstOrDefault().username);
-                    HttpContext.Session.SetString("Email", data.FirstOrDefault().Email);
-                    HttpContext.Session.SetInt32("idUser", data.FirstOrDefault().idUser);
+                    HttpContext.Session.SetString("username", data.username);
+                    HttpContext.Session.SetString("Email", data.Email);
+                    HttpContext.Session.SetInt32("idUser", data.idUser);
+
+
                     return RedirectToAction("Index");
+
                 }
                 else
                 {
-                    ViewBag.error = "Login failed";
-                    return RedirectToAction("Login");
+                    ViewBag.error = "Login failed. Please check your email and password.";
+                    return View();
                 }
+                
+
             }
+
+           
+
+
             return View();
+
         }
 
         public ActionResult Logout()
@@ -115,5 +132,6 @@ namespace Web_Blog.Controllers
         }
 
     }
+
 
 }

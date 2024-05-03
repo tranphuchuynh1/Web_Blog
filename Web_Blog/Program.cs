@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using Web_Blog.Data;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddSession();
 // Register database
 builder.Services.AddDbContext<WebblogDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,7 +29,7 @@ app.UseStaticFiles();
 
 app.UseSession();
 
-// Ti?p t?c v?i các middleware khác và c?u hình
+// Ti?p t?c v?i cï¿½c middleware khï¿½c vï¿½ c?u hï¿½nh
 
 
 app.UseRouting();
