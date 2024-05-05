@@ -1,15 +1,90 @@
 ﻿@model Web_Blog.Models.User
 @{
     ViewBag.Title = "Register";
+    Layout = null;
 }
-<div class="row justify-content-md-center">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Site Metas -->
+    <title>Blog - Nơi Chia Sẻ Và Kết Nối</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Design fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+
+
+    <!-- FontAwesome Icons core CSS -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Style CSS -->
+    <link href="~/css/style.css" rel="stylesheet">
+
+    <!-- Responsive styles for this template -->
+    <link href="~/css/responsive.css" rel="stylesheet">
+
+    <!-- Colors for this template -->
+    <link href="~/css/colors.css" rel="stylesheet">
+
+    <!-- Version Garden CSS for this template -->
+    <link href="~/css/version/garden.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1000;
+            overflow: hidden;
+        }
+
+        .login-form {
+            /* CSS cho form đăng nhập */
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop id="video-background">
+        <source src="/css/upload/quadep.mp4" type="video/mp4">
+    </video>
+<div style="margin-top:100px;opacity: 0.8;" class="row justify-content-md-center">
     <div class="col-md-5">
         @using (Html.BeginForm("Register", "Account", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 
-            <div class="card">
-                <div class="card-header">
+            <div style="background-color: #C1CDCD" class="card">
+                <div style="text-align:center;" class="card-header">
                     <div class="card-title">Register</div>
                 </div>
                 <div class="card-body">
@@ -39,10 +114,11 @@
                         @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "badge badge-danger" })
                     </div>
                     <div class="form-group">
-                        <input type="submit" name="submit" class="btn btn-danger" value="Register" />
+                        <input  type="submit" name="submit" class="btn btn-danger" value="Register" />
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
+</body>
