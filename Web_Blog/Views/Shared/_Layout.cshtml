@@ -20,6 +20,8 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <!-- Design fonts -->
 <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <!-- Bootstrap core CSS -->
 <link href="~/css/bootstrap.css" rel="stylesheet">
@@ -44,31 +46,56 @@
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <style>
-        #slideshow {
-            position: relative;
+    /*---------------------------------------------SlideShow Home---------------------------------------*/
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .swiper {
             width: 100%;
-            max-width: 900px; /* Điều chỉnh kích thước của slideshow */
-            margin: auto;
-            overflow: hidden;
+            height: 100%;
         }
 
-        .slides {
+        .swiper-slide {
+            font-size: 18px;
+            background: #fff;
             display: flex;
-            transition: transform 0.5s ease;
+            justify-content: center;
+            align-items: center;
         }
 
-            .slides figure {
-                width: 20%; /* Mỗi ảnh chiếm 20% chiều rộng của container */
-                text-align: center;
+            .swiper-slide img {
+                display: block;
+                width: 100%;
+                height: 350px;
+                object-fit: cover;
             }
 
-            .slides img {
-                width: 70%; /* Kích thước đầy đủ của ảnh */
-                height: auto;
-                margin-right:3%;
-                border-radius: 50%; /* Để ảnh trở thành hình tròn */
+        .swiper-slide {
+            width: 40%;
+        }
+
+            .swiper-slide:nth-child(2n) {
+                width: 40%;
             }
 
+            .swiper-slide:nth-child(3n) {
+                width: 40%;
+            }
+
+            .swiper-slide:nth-child(4n) {
+                width: 40%;
+            }
+
+            .swiper-slide:nth-child(5n) {
+                width: 40%;
+            }
+        /*----------------------------Contact-----------------------------*/
         .dropdown-menu {
             display: none;
             position: absolute;
@@ -98,10 +125,70 @@
         .dropdown-menu.show {
             display: block;
         }
+        /*----------------------------Contact-----------------------------*/
+        html,
+        body {
+            position: relative;
+            height: 100%;
+        }
 
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .my-swiper {
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+            .my-swiper .swiper-slide {
+                background-position: center;
+                background-size: cover;
+                width: 300px;
+                height: 300px;
+                position: relative; /* Thêm dòng này */
+            }
+
+                .my-swiper .swiper-slide img {
+                    display: block;
+                    width: 100%;
+                }
+
+                .my-swiper .swiper-slide figure {
+                    position: absolute;
+                    bottom: 0; /* Đưa figure về dưới */
+                    text-align: center;
+                    left: 0;
+                    right: 0;
+                    background-color: rgba(255, 255, 255, 0.7); /* Màu nền cho tên */
+                    padding: 5px;
+                    margin: 0;
+                    background-color: rgba(0, 0, 0, 0.5); /* Màu nền đen với độ trong suốt 50% */
+                    color: #fff; /* Màu chữ trắng */
+                    font-weight: bold; /* Đậm */
+                    width: 100%; /* Đảm bảo phần tên nằm trọn trong slide */
+                    box-sizing: border-box; /* Tính cả padding và border vào kích thước */
+                }
+
+                .my-swiper .swiper-slide figcaption {
+                    margin: 0;
+                }
+                /*Footer*/
+        .footer {
+            font-family: Arial, sans-serif; 
+            font-weight: 400; 
+            font-style: italic; 
+            line-height: 1.6; 
+            color: #333; 
+        }
 </style>
    
-
 </head>
 <body>
 
@@ -204,22 +291,18 @@
                     <div class="col-lg-8 offset-lg-2">
                         <div class="widget">
                             <div class="footer-text text-center">
-                                <p>Forest Time is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
+                                <p>Web Blog is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
                                 <div class="social">
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google Plus"><i class="fa fa-google-plus"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
                                 </div>
 
                                 <hr class="invis">
 
                                 <div class="newsletter-widget text-center">
-                                    <form class="form-inline">
-                                        <input type="text" class="form-control" placeholder="Enter your email address">
-                                        <button type="submit" class="btn btn-primary">Subscribe <i class="fa fa-envelope-open-o"></i></button>
-                                    </form>
+
                                 </div><!-- end newsletter -->
                             </div><!-- end footer-text -->
                         </div><!-- end widget -->
@@ -230,7 +313,7 @@
                     <div class="col-md-12 text-center">
                         <br>
                         <br>
-                        <div class="copyright">&copy; Forest Time. Design: <a href="http://html.design">HTML Design</a>.</div>
+                        <div class="copyright">&copy; Forest Time. Design: <a href="http://html.design">LAKER.K19 Design</a>.</div>
                     </div>
                 </div>
             </div><!-- end container -->
@@ -245,33 +328,53 @@
     <script src="~/js/tether.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/custom.js"></script>
+    <!----------------------Phần Silde Show------------>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
     <script>
-
-        let slideIndex = 0;
-        const slides = document.querySelector('#slideshow .slides');
-        const images = document.querySelectorAll('#slideshow .slides img');
-        const imageWidth = images[0].clientWidth;
-
-        showSlides();
-
-        function showSlides() {
-            slideIndex++;
-            slides.style.transform = `translateX(-${slideIndex * imageWidth}px)`;
-
-            if (slideIndex === images.length) {
-                slideIndex = 0;
-                setTimeout(() => slides.style.transition = 'none', 500); // Tạm thời loại bỏ hiệu ứng chuyển đổi
-                setTimeout(() => slides.style.transform = `translateX(0)`, 600); // Quay lại ảnh đầu tiên
-                setTimeout(() => slides.style.transition = 'transform 0.5s ease', 700); // Khôi phục hiệu ứng chuyển đổi
-            }
-
-            setTimeout(showSlides, 2000); // Thay đổi 2000 nếu bạn muốn thay đổi tốc độ chuyển đổi
-        }
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: "auto",
+            spaceBetween: 30,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            autoplay: {
+                delay: 3000, // Thời gian trễ giữa các slide là 3 giây (3000 milliseconds)
+            },
+        });
     </script>
+
     <script>
         document.querySelector('.arrow-icon').addEventListener('click', function () {
             var dropdownMenu = this.closest('.nav-item').querySelector('.dropdown-menu');
             dropdownMenu.classList.toggle('show');
+        });
+    </script>
+    <!----------Contact---------->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".my-swiper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+            },
+            autoplay: {
+                delay : 2000,
+            },
         });
     </script>
 </body>

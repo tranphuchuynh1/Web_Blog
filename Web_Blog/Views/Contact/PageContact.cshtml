@@ -38,29 +38,40 @@
     <!-- Version Garden CSS for this template -->
     <link href="~/css/version/garden.css" rel="stylesheet">
 </head>
-<div id="slideshow">
-    <div class="slides">
-        <figure>
-            <img src="~/css/upload/author.jpg" alt="Nguyễn Hữu Thạch">
-            <figcaption>Thạch</figcaption>
-        </figure>
-        <figure>
-            <img src="~/css/upload/author_01.jpg" alt="Trần Phúc Huynh">
-            <figcaption>Huynh</figcaption>
-        </figure>
-        <figure>
-            <img src="~/css/upload/author_02.jpg" alt="Hoàng Văn Đức Trọng">
-            <figcaption>Trọng</figcaption>
-        </figure>
-        <figure>
-            <img src="~/css/upload/author_03.jpg" alt="Phan Trung Hậu">
-            <figcaption>Hậu</figcaption>
-        </figure>
-        <figure>
-            <img src="~/css/upload/author.jpg" alt="Đinh Minh Thành">
-            <figcaption>Thành</figcaption>
-        </figure>
+<div id="slideshow" class="my-swiper my-swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img src="https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg" alt="">
+            <figure>
+                <figcaption>Nguyễn Hữu Thạch</figcaption>
+            </figure>
+        </div>
+        <div class="swiper-slide">
+            <img src="https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg" alt="">
+            <figure>
+                <figcaption>Trần Phúc Huynh</figcaption>
+            </figure>
+        </div>
+        <div class="swiper-slide">
+            <img src="https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg" alt="">
+            <figure>
+                <figcaption>Hoàng Văn Đức Trọng</figcaption>
+            </figure>
+        </div>
+        <div class="swiper-slide">
+            <img src="https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg" alt="">
+            <figure>
+                <figcaption>Phan Trung Hậu</figcaption>
+            </figure>
+        </div>
+        <div class="swiper-slide">
+            <img src="https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg" alt="">
+            <figure>
+                <figcaption>Đinh Minh Thành</figcaption>
+            </figure>
+        </div>
     </div>
+    <div class="swiper-pagination"></div>
 </div>
 <br>
 <section class="section wb">
@@ -89,6 +100,27 @@
 
                     <div class="row">
                         <div class="col-lg-8 offset-lg-2">
+                            @model Contact
+
+                            <form asp-action="PageContact" method="post" class="form-wrapper">
+                                <div class="form-group">
+                                    <label asp-for="Name">Name:</label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Email">Email:</label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Message">Message:</label>
+                                    <textarea asp-for="Message" class="form-control"></textarea>
+                                    <span asp-validation-for="Message" class="text-danger"></span>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send <i class="fa fa-envelope-open-o"></i></button>
+                            </form>
+
                            <!-- <form class="form-wrapper">
                                 <input type="text" class="form-control" placeholder="Your name">
                                 <input type="text" class="form-control" placeholder="Email address">
