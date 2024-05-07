@@ -2,9 +2,9 @@
 
 namespace Web_Blog.Controllers
 {
-    public class PageDetailsController : Controller
+    public class CreatePost : Controller
     {
-        public IActionResult PageDetails()
+        public IActionResult index()
         {
             return View();
         }
