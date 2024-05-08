@@ -13,16 +13,16 @@ namespace Web_Blog.Models
 
         [Required]
         [MaxLength]
-        public string Content { get; set; }
+        public string? Content { get; set; }
 
-        public string ImageURL { get; set; }
+        public string? ImageURL { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreatedAt { get; set; }
 
         // Khai báo quan hệ với bảng Users
         public int idUser { get; set; }
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
 
     }
 }
