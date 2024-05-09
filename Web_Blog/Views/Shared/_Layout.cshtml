@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Basic -->
@@ -46,7 +47,7 @@
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <style>
-    /*---------------------------------------------SlideShow Home---------------------------------------*/
+   
         body {
             background: #eee;
             font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -188,23 +189,145 @@
             color: #333; 
         }
 
-        .topsocial a {
-            display: inline-block;
-            margin-right: 8px;
-            font-size: 35px;
-            transition: transform 0.3s ease;
+        #all {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin: 0 auto; /* Đặt margin auto để căn giữa theo chiều ngang */
         }
 
-            .topsocial a:hover {
-                transform: scale(1.2);
+            #all > div {
+                padding: 10px;
             }
-        </style>
+
+        #formContainer{
+            width:52%;
+        }
+  
+
+        #mySelect {
+            width: 150px;
+            height: 30px;
+            padding-left: 10px;
+        }
+
+        #tieude {
+            width: 150px;
+            height: 30px;
+            padding-left: 10px;
+        }
+
+        #post {
+            padding: 7px;
+            width: 80px;
+            border-radius: 7px;
+            background-color: black;
+            color: white;
+            font-weight: bold;
+        }
+
+     
+
+        /* CSS để tạo overlay và canter form */
+        #overlay {
+         
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Màu nền với độ mờ */
+            z-index: 1000; /* Sắp xếp trên tất cả các phần tử khác */
+        }
+
+        #formContainer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .overlayHidden {
+            display: none;
+        }
+
+        #closeButton{
+            display:flex;
+            text-align:center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #closeText {
+            display: none;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center; /* Ẩn ban đầu */
+            color:red;
+        }
+
+        #titleh2{
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+</style>
+   
 </head>
 <body>
+    <div id="form" style="display:none;">
+    <div id="overlay">
+        <div id="formContainer">
+            <h2 id="titleh2">Create Post</h2>
+           <div id="all">
+                    <div class="theloai">
+                        <select id="mySelect">
+                            <option value="option1">In Living</option>
+                            <option value="option2">Tourism</option>
+                            <option value="option3">Technology</option>
+                            <option value="option3">Fashion</option>
+                        </select>
+                    </div>
+
+
+                    <div>
+                        <input type="text" id="tieude" placeholder="title"><br>
+                    </div>
+
+
+                    <div class="anh">
+                          <input  type="file" id="uploadFile" name="uploadFile" class="custom-file-input" accept="image/*">
+                        <img id="previewImage" src="#" style="display: none; width: 464px; height: 248px;">
+
+                    </div>
+                    <div class="content">
+                        <textarea id="userInput" name="userInput" rows="6" cols="50" placeholder="Nhập nội dung của bạn ở đây..."></textarea>
+                    </div>
+
+                    <div>
+                        <button id="post">Post</button>
+                    </div>
+
+
+                        <div>
+                            <i id="closeButton" class="fa-solid fa-xmark"></i>
+                            <span id="closeText" style="display: none;">CLOSE</span>
+                        </div>
+          </div>
+         
+        </div>
+    </div>
+    </div>
 
     <div id="wrapper">
-        
-
         <div class="topbar-section" >
             <div class="container-fluid">
                 <div class="row">
@@ -223,7 +346,18 @@
 
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="topsearch text-right">
-                            <partial  name="_LoginPartial"></partial>
+                            <ul class="navbar-nav">
+
+                                <li class="nav-item">
+                                    <a id="manage" style="color:white" asp-area="" asp-page="" title="Manage">Hello @ViewBag.username</a>
+                                </li>
+                                <li class="nav-item">
+                                    <form asp-area="" asp-controller="Account" asp-action="Logout">
+                                        <button id="logout" type="submit">Logout</button>
+                                    </form>
+                                </li>
+
+                            </ul>
                         </div>
                     </div><!-- end col -->
                 </div><!-- end row -->
@@ -235,7 +369,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="logo" style="text-align:center !important;">
-                            <a  href="garden-index.html"><img style="border-radius:100px;" src="/css/upload/Screenshot 2024-04-25 212607.png" /></a>
+                            <a  href="#"><img style="border-radius:100px;" src="/css/upload/Screenshot 2024-04-25 212607.png" /></a>
                         </div><!-- end logo -->
                     </div>
                 </div><!-- end row -->
@@ -256,10 +390,10 @@
                             <li class="nav-item">
                                 <div class="nav-link color-green-hover category-toggle">Category <i style="padding-left:5px;" class="fa-solid fa-angle-down arrow-icon"></i></div>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">In Living</a></li>
-                                    <li><a href="#">Tourism</a></li>
-                                    <li><a href="#">Technology</a></li>
-                                    <li><a href="#">Fashion</a></li>
+                                    <li><a asp-area=  asp-controller="InLiving" asp-action="PageInLiving" >In Living</a></li>
+                                    <li><a asp-area=  asp-controller="Tourism" asp-action="PageTourism">Tourism</a></li>
+                                    <li><a asp-area=  asp-controller="Technology" asp-action="PageTechnology">Technology</a></li>
+                                    <li><a asp-area=  asp-controller="Fashion" asp-action="PageFashion">Fashion</a></li>
                                 </ul>
                             </li>
 
@@ -270,7 +404,10 @@
                                 <a class="nav-link color-green-hover" asp-area="" asp-controller="Contact" asp-action="PageContact">Contact</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" href="#">Profile</a>
+                                <a class="nav-link color-green-hover" asp-area="" asp-controller="Profile" asp-action="PageProfile">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link color-green-hover" id="createPostLink" href="#">Create Post</a>
                             </li>
                         </ul>
                     </div>
@@ -278,8 +415,7 @@
                 </nav>
             </div><!-- end container -->
         </header><!-- end header -->
-
-
+      
 
 
 
@@ -322,7 +458,7 @@
                     <div class="col-md-12 text-center">
                         <br>
                         <br>
-                        <div class="copyright">&copy; Forest Time. Design: <a href="http://html.design">LAKER.K19 Design</a>.</div>
+                        <div class="copyright" style="color:antiquewhite">&copy; Forest Time. Design: <a href="http://html.design">LAKER.K19 Design</a>.</div>
                     </div>
                 </div>
             </div><!-- end container -->
@@ -330,9 +466,7 @@
 
         <div class="dmtop">Scroll to Top</div>
 
-    </div><!-- end wrapper -->
-    <!-- Core JavaScript
-    ================================================== -->
+    </div>
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/tether.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
@@ -360,6 +494,10 @@
             var dropdownMenu = this.closest('.nav-item').querySelector('.dropdown-menu');
             dropdownMenu.classList.toggle('show');
         });
+
+      
+
+
     </script>
     <!----------Contact---------->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -385,6 +523,103 @@
                 delay : 2000,
             },
         });
+    </script>
+    <script>
+        document.getElementById('uploadFile').onchange = function (event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('previewImage');
+                output.src = reader.result;
+                output.style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        };
+        // Lấy ra element textarea
+        var textarea = document.getElementById("userInput");
+
+        textarea.addEventListener("input", function () {
+            var lineHeight = parseFloat(window.getComputedStyle(textarea).lineHeight);
+            var maxHeight = lineHeight * 13; // Chiều cao tối đa tính bằng số dòng nhân chiều cao của mỗi dòng
+            var scrollHeight = textarea.scrollHeight;
+
+            if (scrollHeight > maxHeight) {
+                textarea.style.height = maxHeight + "px";
+                textarea.style.overflowY = "auto";
+            } else {
+                textarea.style.height = scrollHeight + "px";
+                textarea.style.overflowY = "hidden";
+            }
+        });
+
+
+        var overlay = document.getElementById("overlay");
+
+        var formContainer = document.getElementById("formContainer");
+
+        var closeButton = document.getElementById("closeButton");
+
+        var closeButton = document.getElementById("closeButton");
+        var closeText = document.getElementById("closeText");
+
+        var createPostLink = document.getElementById("createPostLink");
+
+        var form = document.getElementById("form");
+
+        closeButton.addEventListener("mouseenter", function () {
+            closeText.style.display = "block";
+            closeButton.style.display = "none";
+        });
+
+        createPostLink.addEventListener("click", function () {
+            form.style.display = "block"; // Hiển thị form khi click vào nút "Create Post"
+        });
+
+        closeButton.addEventListener("click", function () {
+
+            form.style.display = "none";
+        });
+
+        closeText.addEventListener("click", function () {
+
+            form.style.display = "none";
+        });
+        // Bắt sự kiện click trên overlay để ẩn form
+        overlay.addEventListener("click", function (event) {
+            // Kiểm tra xem sự kiện click có diễn ra trên form container không
+            if (!formContainer.contains(event.target)) {
+                // Nếu không, ẩn overlay và form container
+                form.style.display = "none";
+            }
+        });
+
+        const mySelect = document.getElementById("mySelect");
+        const tieude = document.getElementById("tieude");
+        const uploadFile = document.getElementById("uploadFile");
+        const userInput = document.getElementById("userInput");
+
+        // Thêm sự kiện click cho nút "Post"
+        const postButton = document.getElementById("post");
+        postButton.addEventListener("click", function () {
+            // Lấy giá trị được chọn từ dropdown
+            const theloai = mySelect.value;
+            // Lấy giá trị nhập vào từ input "title"
+            const title = tieude.value;
+            // Lấy tên của file đã chọn từ input file
+            const filename = uploadFile.files[0].name;
+            // Lấy nội dung nhập vào từ textarea
+            const content = userInput.value;
+
+            // In ra console để kiểm tra
+            console.log("Thể loại:", theloai);
+            console.log("Tiêu đề:", title);
+            console.log("File ảnh:", filename);
+            console.log("Nội dung:", content);
+
+            // Sau khi đã lấy được dữ liệu, bạn có thể gửi nó đến máy chủ để xử lý
+        });
+      
+       
+
     </script>
 </body>
 </html>

@@ -15,18 +15,28 @@ namespace Web_Blog.Controllers
 
         public IActionResult PageContact()
         {
+            string userName = HttpContext.Session.GetString("username");
+            string email = HttpContext.Session.GetString("Email");
+
+            // Gán tên người dùng vào ViewBag để truyền sang view
+            ViewBag.UserName = userName;
+            ViewBag.EMAIL = email;
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> PageContact(Contact model)
         {
+            
             if (ModelState.IsValid)
             {
                 await _contactRepository.AddContactAsync(model);
                 return RedirectToAction("ContactSuccess");
+                
+                
             }
             return View(model);
+            
         }
 
         public IActionResult ContactSuccess()

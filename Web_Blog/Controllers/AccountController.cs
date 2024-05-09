@@ -34,20 +34,21 @@ namespace Web_Blog.Controllers
         }
         public ActionResult Index()
         {
-            if (HttpContext.Session.GetInt32("idUser") != null)
-            {
-                // Lấy tên người dùng từ Session
-                string userName = HttpContext.Session.GetString("username");
+            
+               if (HttpContext.Session.GetInt32("idUser") != null)
+               {
 
-                // Gán tên người dùng vào ViewBag để truyền sang view
-                ViewBag.UserName = userName;
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
-           
+                   string userName = HttpContext.Session.GetString("username");
+
+                   // Gán tên người dùng vào ViewBag để truyền sang view
+                   ViewBag.UserName = userName;
+                   return View();
+               }
+               else
+               {
+                   return RedirectToAction("Login");
+               }
+
         }
         public ActionResult Register()
         {
@@ -79,11 +80,12 @@ namespace Web_Blog.Controllers
 
             }
             return View();
-
+                        
 
         }
         public ActionResult Login()
         {
+           
             return View();
         }
 
