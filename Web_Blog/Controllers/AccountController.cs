@@ -34,13 +34,14 @@ namespace Web_Blog.Controllers
         }
         public ActionResult Index()
         {
-            
+
+
+  
                if (HttpContext.Session.GetInt32("idUser") != null)
                {
 
                    string userName = HttpContext.Session.GetString("username");
 
-                   // Gán tên người dùng vào ViewBag để truyền sang view
                    ViewBag.UserName = userName;
                    return View();
                }

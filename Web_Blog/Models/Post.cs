@@ -6,10 +6,13 @@ namespace Web_Blog.Models
 {
     public class Post
     {
-        [Key]
+        [Key, Column(Order = 1)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int PostID { get; set; }
 
         public int UserID { get; set; }
+        public string? Title { get; set; }
+        public string? Category { get; set; }
 
         [Required]
         [MaxLength]

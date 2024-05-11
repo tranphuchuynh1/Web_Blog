@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Basic -->
@@ -94,7 +93,7 @@
             }
 
             .swiper-slide:nth-child(5n) {
-                width: 40%;
+width: 40%;
             }
         /*----------------------------Contact-----------------------------*/
         .dropdown-menu {
@@ -184,8 +183,8 @@
         .footer {
             font-family: Arial, sans-serif; 
             font-weight: 400; 
-            font-style: italic; 
-            line-height: 1.6; 
+            font-style: italic;
+line-height: 1.6; 
             color: #333; 
         }
 
@@ -279,54 +278,45 @@
             justify-content: center;
             align-items: center;
         }
+            .slideshow {
+        position: relative;
+        width: 100%;
+        height: 350px; /* Thay đổi kích thước slideshow theo nhu cầu */
+        overflow: hidden;
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .slide.active {
+        opacity: 1;
+    }
+    .widget-inta {
+        margin-bottom:10px;
+    }
+
+    .slideshow {
+        display: flex;
+        border: 5px solid #ccc; /* Màu và kích thước của khung viền */
+    }
+
+    .slide {
+        width: 100%;
+        height: auto;
+        transition: transform 1s ease-in-out;
+    }
 </style>
    
 </head>
 <body>
-    <div id="form" style="display:none;">
-    <div id="overlay">
-        <div id="formContainer">
-            <h2 id="titleh2">Create Post</h2>
-           <div id="all">
-                    <div class="theloai">
-                        <select id="mySelect">
-                            <option value="option1">In Living</option>
-                            <option value="option2">Tourism</option>
-                            <option value="option3">Technology</option>
-                            <option value="option3">Fashion</option>
-                        </select>
-                    </div>
-
-
-                    <div>
-                        <input type="text" id="tieude" placeholder="title"><br>
-                    </div>
-
-
-                    <div class="anh">
-                          <input  type="file" id="uploadFile" name="uploadFile" class="custom-file-input" accept="image/*">
-                        <img id="previewImage" src="#" style="display: none; width: 464px; height: 248px;">
-
-                    </div>
-                    <div class="content">
-                        <textarea id="userInput" name="userInput" rows="6" cols="50" placeholder="Nhập nội dung của bạn ở đây..."></textarea>
-                    </div>
-
-                    <div>
-                        <button id="post">Post</button>
-                    </div>
-
-
-                        <div>
-                            <i id="closeButton" class="fa-solid fa-xmark"></i>
-                            <span id="closeText" style="display: none;">CLOSE</span>
-                        </div>
-          </div>
-         
-        </div>
-    </div>
-    </div>
-
+   <partial name="_CreatePostPartial" />
     <div id="wrapper">
         <div class="topbar-section" >
             <div class="container-fluid">
@@ -335,7 +325,6 @@
                         <div class="topsocial">
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google+"><i class="fa fa-google-plus"></i></a>
@@ -350,7 +339,7 @@
                             <ul class="navbar-nav">
 
                                 <li class="nav-item">
-                                    <a id="manage" style="color:white" asp-area="" asp-page="" title="Manage">Hello @ViewBag.username</a>
+<a id="manage" style="color:white" asp-area="" asp-page="" title="Manage">Hello @ViewBag.username</a>
                                 </li>
                                 <li class="nav-item">
                                     <form asp-area="" asp-controller="Account" asp-action="Logout">
@@ -397,8 +386,7 @@
                                     <li><a asp-area=  asp-controller="Fashion" asp-action="PageFashion">Fashion</a></li>
                                 </ul>
                             </li>
-
-                            <li class="nav-item">
+<li class="nav-item">
                                 <a class="nav-link color-green-hover" href="#">Notification</a>
                             </li>
                             <li class="nav-item">
@@ -460,7 +448,7 @@
                         <br>
                         <br>
                         <div class="copyright" style="color:antiquewhite">&copy; Forest Time. Design: <a href="http://html.design">LAKER.K19 Design</a>.</div>
-                    </div>
+</div>
                 </div>
             </div><!-- end container -->
         </footer><!-- end footer -->
@@ -485,7 +473,7 @@
                 clickable: true,
             },
             autoplay: {
-                delay: 3000, // Thời gian trễ giữa các slide là 3 giây (3000 milliseconds)
+                delay: 3000,
             },
         });
     </script>
@@ -535,18 +523,18 @@
             };
             reader.readAsDataURL(event.target.files[0]);
         };
-        // Lấy ra element textarea
+      
         var textarea = document.getElementById("userInput");
 
         textarea.addEventListener("input", function () {
             var lineHeight = parseFloat(window.getComputedStyle(textarea).lineHeight);
-            var maxHeight = lineHeight * 13; // Chiều cao tối đa tính bằng số dòng nhân chiều cao của mỗi dòng
+            var maxHeight = lineHeight * 13;
             var scrollHeight = textarea.scrollHeight;
 
             if (scrollHeight > maxHeight) {
                 textarea.style.height = maxHeight + "px";
                 textarea.style.overflowY = "auto";
-            } else {
+} else {
                 textarea.style.height = scrollHeight + "px";
                 textarea.style.overflowY = "hidden";
             }
@@ -572,7 +560,7 @@
         });
 
         createPostLink.addEventListener("click", function () {
-            form.style.display = "block"; // Hiển thị form khi click vào nút "Create Post"
+            form.style.display = "block"; 
         });
 
         closeButton.addEventListener("click", function () {
@@ -584,43 +572,67 @@
 
             form.style.display = "none";
         });
-        // Bắt sự kiện click trên overlay để ẩn form
+       
         overlay.addEventListener("click", function (event) {
-            // Kiểm tra xem sự kiện click có diễn ra trên form container không
+        
             if (!formContainer.contains(event.target)) {
-                // Nếu không, ẩn overlay và form container
+      
                 form.style.display = "none";
             }
         });
 
-        const mySelect = document.getElementById("mySelect");
-        const tieude = document.getElementById("tieude");
-        const uploadFile = document.getElementById("uploadFile");
-        const userInput = document.getElementById("userInput");
 
-        // Thêm sự kiện click cho nút "Post"
-        const postButton = document.getElementById("post");
-        postButton.addEventListener("click", function () {
-            // Lấy giá trị được chọn từ dropdown
-            const theloai = mySelect.value;
-            // Lấy giá trị nhập vào từ input "title"
-            const title = tieude.value;
-            // Lấy tên của file đã chọn từ input file
-            const filename = uploadFile.files[0].name;
-            // Lấy nội dung nhập vào từ textarea
-            const content = userInput.value;
 
-            // In ra console để kiểm tra
-            console.log("Thể loại:", theloai);
-            console.log("Tiêu đề:", title);
-            console.log("File ảnh:", filename);
-            console.log("Nội dung:", content);
+         $(document).ready(function () {
+     $("#post").click(function () {  
+         var theloai = $("#mySelect").val(); 
+         var tieude = $("#tieude").val();
+         var userInput = $("#userInput").val(); 
+         var fileInput = document.getElementById('uploadFile');
+         if (fileInput.files.length > 0) {
+             var file = fileInput.files[0];
+             
+             var formData = new FormData();
+             formData.append('Category', theloai);
+             formData.append('Title', tieude);
+             formData.append('Content', userInput);
+             formData.append('ImageURL', file);
 
-            // Sau khi đã lấy được dữ liệu, bạn có thể gửi nó đến máy chủ để xử lý
-        });
-      
-       
+        
+             $.ajax({
+                 type: "POST",
+                 url: "/CreatePost/Create",
+                 data: formData, 
+                 contentType: false, 
+                 processData: false,
+                 success: function (response) {
+                    
+                     alert('Bài viết đã được đăng thành công!');
+                 },
+                 error: function (xhr, status, error) {
+                     console.error(xhr.responseText); 
+                     alert('Đã xảy ra lỗi trong quá trình đăng bài. ' + xhr.statusText);
+                 }
 
+             });
+         } else {
+             alert('Vui lòng chọn ảnh trước khi đăng bài.');
+         }
+     });
+ });
     </script>
+    <script>
+   document.addEventListener("DOMContentLoaded", function() {
+    var slides = document.querySelectorAll('.slide');
+    var currentSlide = 0;
+var slideInterval = setInterval(nextSlide, 5000); 
+
+    function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+});
+</script>
 </body>
 </html>
