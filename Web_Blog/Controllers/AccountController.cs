@@ -120,9 +120,8 @@ namespace Web_Blog.Controllers
 
             }
 
-           
 
-
+            
             return View();
 
         }

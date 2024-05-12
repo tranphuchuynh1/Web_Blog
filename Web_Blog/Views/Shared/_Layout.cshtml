@@ -558,7 +558,7 @@
             },
         });
     </script>
-    <script>
+   <script>
         document.getElementById('uploadFile').onchange = function (event) {
             var reader = new FileReader();
             reader.onload = function () {
@@ -568,18 +568,18 @@
             };
             reader.readAsDataURL(event.target.files[0]);
         };
-        // Lấy ra element textarea
+      
         var textarea = document.getElementById("userInput");
 
         textarea.addEventListener("input", function () {
             var lineHeight = parseFloat(window.getComputedStyle(textarea).lineHeight);
-            var maxHeight = lineHeight * 13; // Chiều cao tối đa tính bằng số dòng nhân chiều cao của mỗi dòng
+            var maxHeight = lineHeight * 13;
             var scrollHeight = textarea.scrollHeight;
 
             if (scrollHeight > maxHeight) {
                 textarea.style.height = maxHeight + "px";
                 textarea.style.overflowY = "auto";
-            } else {
+} else {
                 textarea.style.height = scrollHeight + "px";
                 textarea.style.overflowY = "hidden";
             }
@@ -605,7 +605,7 @@
         });
 
         createPostLink.addEventListener("click", function () {
-            form.style.display = "block"; // Hiển thị form khi click vào nút "Create Post"
+            form.style.display = "block"; 
         });
 
         closeButton.addEventListener("click", function () {
@@ -617,40 +617,55 @@
 
             form.style.display = "none";
         });
-        // Bắt sự kiện click trên overlay để ẩn form
+       
         overlay.addEventListener("click", function (event) {
-            // Kiểm tra xem sự kiện click có diễn ra trên form container không
+        
             if (!formContainer.contains(event.target)) {
-                // Nếu không, ẩn overlay và form container
+      
                 form.style.display = "none";
             }
         });
 
-        const mySelect = document.getElementById("mySelect");
-        const tieude = document.getElementById("tieude");
-        const uploadFile = document.getElementById("uploadFile");
-        const userInput = document.getElementById("userInput");
 
-        // Thêm sự kiện click cho nút "Post"
-        const postButton = document.getElementById("post");
-        postButton.addEventListener("click", function () {
-            // Lấy giá trị được chọn từ dropdown
-            const theloai = mySelect.value;
-            // Lấy giá trị nhập vào từ input "title"
-            const title = tieude.value;
-            // Lấy tên của file đã chọn từ input file
-            const filename = uploadFile.files[0].name;
-            // Lấy nội dung nhập vào từ textarea
-            const content = userInput.value;
 
-            // In ra console để kiểm tra
-            console.log("Thể loại:", theloai);
-            console.log("Tiêu đề:", title);
-            console.log("File ảnh:", filename);
-            console.log("Nội dung:", content);
+         $(document).ready(function () {
+     $("#post").click(function () {  
+         var theloai = $("#mySelect").val(); 
+         var tieude = $("#tieude").val();
+         var userInput = $("#userInput").val(); 
+         var fileInput = document.getElementById('uploadFile');
+         if (fileInput.files.length > 0) {
+             var file = fileInput.files[0];
+             
+             var formData = new FormData();
+             formData.append('Category', theloai);
+             formData.append('Title', tieude);
+             formData.append('Content', userInput);
+             formData.append('ImageURL', file);
 
-            // Sau khi đã lấy được dữ liệu, bạn có thể gửi nó đến máy chủ để xử lý
-        });
+        
+             $.ajax({
+                 type: "POST",
+                 url: "/CreatePost/Create",
+data: formData, 
+                 contentType: false, 
+                 processData: false,
+                 success: function (response) {
+                    
+                     alert('Bài viết đã được đăng thành công!');
+                      form.style.display = "none";
+                 },
+                 error: function (xhr, status, error) {
+                     console.error(xhr.responseText); 
+                     alert('Đã xảy ra lỗi trong quá trình đăng bài. ' + xhr.statusText);
+                 }
+
+             });
+         } else {
+             alert('Vui lòng chọn ảnh trước khi đăng bài.');
+         }
+     });
+ });
     </script>
     <script>
    document.addEventListener("DOMContentLoaded", function() {

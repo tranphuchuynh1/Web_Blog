@@ -112,6 +112,7 @@
 
   <ItemGroup>
     <Folder Include="Views\CreatePost\" />
+    <Folder Include="wwwroot\ProductImages\" />
   </ItemGroup>
 
 </Project>
