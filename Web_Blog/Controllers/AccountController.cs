@@ -10,7 +10,8 @@ namespace Web_Blog.Controllers
     public class AccountController : Controller
     {
         private readonly WebblogDbContext _db;
-      
+        
+
 
         public AccountController(WebblogDbContext db)
         {
@@ -132,7 +133,14 @@ namespace Web_Blog.Controllers
             return RedirectToAction("Login");
         }
 
+
+        
     }
+
+
+
+
+    
 
 
 }
