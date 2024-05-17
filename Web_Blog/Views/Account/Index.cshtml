@@ -219,10 +219,15 @@
                                         <div class="post-content">
                                             <h2 class="title">@post.Title</h2>
                                             <p>@post.Content</p>
-                                            @if (!string.IsNullOrEmpty(post.ImageURL))
+                                            @if (!string.IsNullOrEmpty(post.ImageBase64))
+                                            {
+                                                <img style="width: 464px; height: 248px;" src="data:image/jpeg;base64,@post.ImageBase64" alt="Post Image" />
+                                            }
+                                            else if (!string.IsNullOrEmpty(post.ImageURL))
                                             {
                                                 <img style="width: 464px; height: 248px;" src="@post.ImageURL" alt="Post Image" />
                                             }
+
 
                                         </div>
                                         <div class="post-actions">

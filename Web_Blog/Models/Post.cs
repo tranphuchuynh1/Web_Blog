@@ -18,7 +18,7 @@ namespace Web_Blog.Models
         public string? Content { get; set; }
 
         public string? ImageURL { get; set; }
-
+        public string ImageBase64 { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

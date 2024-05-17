@@ -43,19 +43,20 @@ namespace Web_Blog.Controllers
                     idUser = userId.Value
                 };
 
-                if (ImageURL != null && ImageURL.Length > 0)
-                {
-                    string fileName = Title + Path.GetExtension(ImageURL.FileName);
-                    string uploadsFolder = Path.Combine(_environment.WebRootPath, "ProductImages");
-                    string filePath = Path.Combine(uploadsFolder, fileName);
 
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                if (ImageURL != null && ImageURL.Length >0)
+        {
+                    // Mã hóa ảnh thành chuỗi Base64
+                    using (var memoryStream = new MemoryStream())
                     {
-                        ImageURL.CopyTo(fileStream);
+                        ImageURL.CopyTo(memoryStream);
+                        byte[] imageBytes = memoryStream.ToArray();
+                        post.ImageBase64 = Convert.ToBase64String(imageBytes);
                     }
-
-                    var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}{HttpContext.Request.PathBase.Value}";
-                    post.ImageURL = $"{baseUrl}/ProductImages/{fileName}";
+                }
+                if (string.IsNullOrEmpty(post.ImageBase64))
+                {
+                    return Json(new { success = false, message = "ImageBase64 is null or empty." });
                 }
 
                 _db.Posts.Add(post);
