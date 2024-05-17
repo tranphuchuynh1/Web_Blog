@@ -5,19 +5,28 @@ using Web_Blog.Models;
 using Microsoft.AspNetCore.Http;
 using System.Security.Cryptography;
 using System.Text;
+using Web_Blog.Models.Interfaces;
+using Web_Blog.Models.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 namespace Web_Blog.Controllers
 {
+
+
     public class AccountController : Controller
     {
+
         private readonly WebblogDbContext _db;
-        
+        IcreatepostRepository IcreatepostRepository;
 
-
-        public AccountController(WebblogDbContext db)
+        public AccountController(WebblogDbContext db, IcreatepostRepository createpostRepository)
         {
             _db = db;
-     
+            IcreatepostRepository = createpostRepository;
         }
+
+
+
         public static string GetMD5(string input)
         {
             using (MD5 md5 = MD5.Create())
@@ -33,23 +42,41 @@ namespace Web_Blog.Controllers
                 return sb.ToString();
             }
         }
+        public ActionResult DeleteConfirmed(int id)
+        {
+            var currentUserId = HttpContext.Session.GetInt32("idUser");
+            Post post = _db.Posts.Find(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            if (post.idUser != currentUserId)
+            {
+                return Forbid(); // Nếu không phải, trả về lỗi 403 Forbidden
+            }
+
+            _db.Posts.Remove(post);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
         public ActionResult Index()
         {
+            var posts = IcreatepostRepository.getallpost();
 
 
-  
-               if (HttpContext.Session.GetInt32("idUser") != null)
-               {
+            if (HttpContext.Session.GetInt32("idUser") != null)
+            {
 
-                   string userName = HttpContext.Session.GetString("username");
+                string userName = HttpContext.Session.GetString("username");
 
-                   ViewBag.UserName = userName;
-                   return View();
-               }
-               else
-               {
-                   return RedirectToAction("Login");
-               }
+                ViewBag.UserName = userName;
+                return View(posts);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
 
         }
         public ActionResult Register()
@@ -82,12 +109,12 @@ namespace Web_Blog.Controllers
 
             }
             return View();
-                        
+
 
         }
         public ActionResult Login()
         {
-           
+
             return View();
         }
 
@@ -97,7 +124,7 @@ namespace Web_Blog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string email, string password)
         {
-            
+
             if (ModelState.IsValid)
             {
                 var f_password = GetMD5(password);
@@ -118,12 +145,13 @@ namespace Web_Blog.Controllers
                     ViewBag.error = "Login failed. Please check your email and password.";
                     return View();
                 }
-                
+
 
             }
 
 
-            
+
+
             return View();
 
         }
@@ -134,14 +162,7 @@ namespace Web_Blog.Controllers
             return RedirectToAction("Login");
         }
 
-
-        
     }
-
-
-
-
-    
 
 
 }

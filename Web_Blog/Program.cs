@@ -2,14 +2,19 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using Web_Blog.Data;
 using Microsoft.AspNetCore.Identity;
-
+using Web_Blog.Models.Interfaces;
+using Web_Blog.Models.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddControllersWithViews();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 //
+builder.Services.AddScoped<IcreatepostRepository, createpostRepository>();
+
 // Register database
 builder.Services.AddDbContext<WebblogDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

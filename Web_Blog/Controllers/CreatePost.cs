@@ -4,12 +4,18 @@ using Web_Blog.Models;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Diagnostics;
+using Web_Blog.Models.Interfaces;
+using Web_Blog.Models.Services;
+using System;
+
+
 namespace Web_Blog.Controllers
 {
     public class CreatePost : Controller
     {
         private readonly WebblogDbContext _db;
         private readonly IWebHostEnvironment _environment;
+
         public CreatePost(WebblogDbContext db, IWebHostEnvironment environment)
         {
             _db = db;
@@ -21,20 +27,20 @@ namespace Web_Blog.Controllers
 
             if (ModelState.IsValid)
             {
-
+                DateTime CreatedAt = DateTime.Now;
+                string userName = HttpContext.Session.GetString("username");
                 int? userId = HttpContext.Session.GetInt32("idUser");
-
                 Post post = new Post
                 {
                     Category = Category,
                     Title = Title,
                     Content = Content,
-                    CreatedAt = DateTime.Now,
+                    CreatedAt = CreatedAt,
                     idUser = userId.Value
                 };
                 if (ImageURL != null && ImageURL.Length > 0)
                 {
-                    string fileName = Category + Path.GetExtension(ImageURL.FileName);
+                    string fileName = Title + Path.GetExtension(ImageURL.FileName);
                     string filePath = @"wwwroot\ProductImages\" + fileName;
 
 
@@ -51,20 +57,14 @@ namespace Web_Blog.Controllers
                 }
                 _db.Posts.Add(post);
                 _db.SaveChanges();
-
                 // Điều hướng người dùng đến trang hiển thị bài viết đã đăng
-                return RedirectToAction("Index", "Account");
+                return Json(new { success = true, imageUrl = post.ImageURL, category = post.Category, title = post.Title, content = post.Content, createdAt = post.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss"), username = userName });
             }
             else
             {
 
-                return RedirectToAction("Login", "Account");
+                return Json(new { success = false, message = "Model state is invalid." });
             }
-
         }
-
-
     }
-
-
 }

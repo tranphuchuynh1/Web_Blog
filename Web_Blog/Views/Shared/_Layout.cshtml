@@ -110,6 +110,23 @@ width: 40%;
         .nav-item {
             position: relative; /* Đảm bảo .dropdown-menu được định vị tương đối với .nav-item */
         }
+          .dropdown-menu1 {
+            display: none;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: 30px; /* Adjust as needed */
+            right: 10px; /* Adjust as needed */
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-menu1.show {
+            display: block;
+        }
 
         .dropdown-menu li {
             background-color: #fff; /* Màu nền mặc định */
@@ -316,41 +333,6 @@ line-height: 1.6;
    
 </head>
 <body>
-    <div id="form" style="display:none;">
-    <div id="overlay">
-        <div id="formContainer">
-            <h2 id="titleh2">Create Post</h2>
-           <div id="all">
-                    <div class="theloai">
-                        <select id="mySelect">
-                            <option value="option1">In Living</option>
-                            <option value="option2">Tourism</option>
-                            <option value="option3">Technology</option>
-                            <option value="option3">Fashion</option>
-                        </select>
-                    </div>
-
-    .slide.active {
-        opacity: 1;
-    }
-    .widget-inta {
-        margin-bottom:10px;
-    }
-
-    .slideshow {
-        display: flex;
-        border: 5px solid #ccc; /* Màu và kích thước của khung viền */
-    }
-
-    .slide {
-        width: 100%;
-        height: auto;
-        transition: transform 1s ease-in-out;
-    }
-</style>
-   
-</head>
-<body>
    <partial name="_CreatePostPartial" />
     <div id="wrapper">
         <div class="topbar-section" >
@@ -421,7 +403,7 @@ line-height: 1.6;
                                     <li><a asp-area=  asp-controller="Fashion" asp-action="PageFashion">Fashion</a></li>
                                 </ul>
                             </li>
-<li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link color-green-hover" href="#">Notification</a>
                             </li>
                             <li class="nav-item">
@@ -444,9 +426,9 @@ line-height: 1.6;
 
 
         <!-- Thân Page Ở Đây Nha Anh Em -->
-
+     
                    @RenderBody()
-
+                  
         <!-- Ghi Chú Của HuynhSenpai -->
 
 
@@ -497,7 +479,7 @@ line-height: 1.6;
     <script src="~/js/custom.js"></script>
     <!----------------------Phần Silde Show------------>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>     
     <!-- Initialize Swiper -->
     <script>
         var swiper = new Swiper(".mySwiper", {
@@ -518,14 +500,22 @@ line-height: 1.6;
             var dropdownMenu = this.closest('.nav-item').querySelector('.dropdown-menu');
             dropdownMenu.classList.toggle('show');
         });
-
-      
-
-
     </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var toggleButtons = document.querySelectorAll('.toggle-button');
+        toggleButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var dropdownMenu = this.closest('.post-header').querySelector('.dropdown-menu1');
+                dropdownMenu.classList.toggle('show');
+            });
+        });
+    });
+</script>
+
     <!----------Contact---------->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+    
     <!-- Initialize Swiper -->
     <script>
         var swiper = new Swiper(".my-swiper", {
@@ -548,7 +538,7 @@ line-height: 1.6;
             },
         });
     </script>
-   <script>
+    <script>
         document.getElementById('uploadFile').onchange = function (event) {
             var reader = new FileReader();
             reader.onload = function () {
@@ -617,51 +607,76 @@ line-height: 1.6;
         });
 
 
+$(document).ready(function () {
+    $("#post").click(function (event) {  
+        event.preventDefault(); // Ngăn chặn form submit thông thường
 
-         $(document).ready(function () {
-     $("#post").click(function () {  
-         var theloai = $("#mySelect").val(); 
-         var tieude = $("#tieude").val();
-         var userInput = $("#userInput").val(); 
-         var fileInput = document.getElementById('uploadFile');
-         if (fileInput.files.length > 0) {
-             var file = fileInput.files[0];
-             
-             var formData = new FormData();
-             formData.append('Category', theloai);
-             formData.append('Title', tieude);
-             formData.append('Content', userInput);
-             formData.append('ImageURL', file);
+        var theloai = $("#mySelect").val(); 
+        var tieude = $("#tieude").val();
+        var userInput = $("#userInput").val(); 
+        var fileInput = document.getElementById('uploadFile');
 
-        
-             $.ajax({
-                 type: "POST",
-                 url: "/CreatePost/Create",
-data: formData, 
-                 contentType: false, 
-                 processData: false,
-                 success: function (response) {
-                    
-                     alert('Bài viết đã được đăng thành công!');
-                      form.style.display = "none";
-                 },
-                 error: function (xhr, status, error) {
-                     console.error(xhr.responseText); 
-                     alert('Đã xảy ra lỗi trong quá trình đăng bài. ' + xhr.statusText);
-                 }
+        if (fileInput.files.length > 0) {
+            var file = fileInput.files[0];
 
-             });
-         } else {
-             alert('Vui lòng chọn ảnh trước khi đăng bài.');
-         }
-     });
- });
+            var formData = new FormData();
+            formData.append('Category', theloai);
+            formData.append('Title', tieude);
+            formData.append('Content', userInput);
+            formData.append('ImageURL', file);
+
+            $.ajax({
+                type: "POST",
+                url: "/CreatePost/Create",
+                data: formData, 
+                contentType: false, 
+                processData: false,
+                success: function (response) {
+                    alert('Bài viết đã được đăng thành công!');
+                    $("#mySelect").val('');
+                    $("#tieude").val('');
+                    $("#userInput").val('');
+                    $("#uploadFile").val('');
+                    form.style.display = "none";
+                  var newPostHtml = `
+                            <div class="post">
+                                <div class="post-header">
+                                    <img src="/imgbyHuynh/anh-2.jpg" alt="Profile Picture">
+                                    <div class="post-header-info">
+                                        <h3 class="category">${response.username}</h3>
+                                        <p>Ngày đăng: ${new Date().toLocaleString()}</p>
+                                    </div>
+                                </div>
+                                <div class="post-content">
+                                    <h2 class="title">${tieude}</h2>
+                                    <p>${userInput}</p>
+                                    ${response.imageUrl ? `<img style="width: 464px; height: 248px;" src="${response.imageUrl}" alt="Post Image" />` : ''}
+                                </div>
+                                <div class="post-actions">
+                                    <button class="like-btn">Like</button>
+                                    <button class="comment-btn">Comment</button>
+                                    <button class="share-btn">Share</button>
+                                </div>
+                            </div>`;
+                        $("#newPosts").append(newPostHtml);
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText); 
+                    alert('Đã xảy ra lỗi trong quá trình đăng bài. ' + xhr.statusText);
+                }
+            });
+        } else {
+            alert('Vui lòng chọn ảnh trước khi đăng bài.');
+        }
+    });
+});
+
     </script>
     <script>
    document.addEventListener("DOMContentLoaded", function() {
     var slides = document.querySelectorAll('.slide');
     var currentSlide = 0;
-    var slideInterval = setInterval(nextSlide, 5000); // Thay đổi thời gian chuyển slide ở đây
+var slideInterval = setInterval(nextSlide, 5000); 
 
     function nextSlide() {
         slides[currentSlide].classList.remove('active');

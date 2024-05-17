@@ -19,8 +19,8 @@ namespace Web_Blog.Models
 
         public string? ImageURL { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime? CreatedAt { get; set; }
+
+        public DateTime CreatedAt { get; set; }
 
         // Khai báo quan hệ với bảng Users
         public int idUser { get; set; }
