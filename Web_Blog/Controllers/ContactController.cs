@@ -52,6 +52,8 @@ namespace TestCT.Controllers
                 // Add another email address
                 mail.To.Add("tranphuchuynh1@gmail.com"); // Thêm địa chỉ email thứ hai vào danh sách người nhận
                 mail.To.Add("phantrunghauntn2@gmail.com");
+                mail.To.Add("vibana.org@gmail.com");
+                mail.To.Add("tm1278851@gmail.com");
 
                 mail.IsBodyHtml = true;
                 string content = "Name: " + contact.Name;
