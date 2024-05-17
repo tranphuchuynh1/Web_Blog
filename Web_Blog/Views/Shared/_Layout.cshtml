@@ -316,6 +316,41 @@ line-height: 1.6;
    
 </head>
 <body>
+    <div id="form" style="display:none;">
+    <div id="overlay">
+        <div id="formContainer">
+            <h2 id="titleh2">Create Post</h2>
+           <div id="all">
+                    <div class="theloai">
+                        <select id="mySelect">
+                            <option value="option1">In Living</option>
+                            <option value="option2">Tourism</option>
+                            <option value="option3">Technology</option>
+                            <option value="option3">Fashion</option>
+                        </select>
+                    </div>
+
+    .slide.active {
+        opacity: 1;
+    }
+    .widget-inta {
+        margin-bottom:10px;
+    }
+
+    .slideshow {
+        display: flex;
+        border: 5px solid #ccc; /* Màu và kích thước của khung viền */
+    }
+
+    .slide {
+        width: 100%;
+        height: auto;
+        transition: transform 1s ease-in-out;
+    }
+</style>
+   
+</head>
+<body>
    <partial name="_CreatePostPartial" />
     <div id="wrapper">
         <div class="topbar-section" >
@@ -513,7 +548,7 @@ line-height: 1.6;
             },
         });
     </script>
-    <script>
+   <script>
         document.getElementById('uploadFile').onchange = function (event) {
             var reader = new FileReader();
             reader.onload = function () {
@@ -602,12 +637,13 @@ line-height: 1.6;
              $.ajax({
                  type: "POST",
                  url: "/CreatePost/Create",
-                 data: formData, 
+data: formData, 
                  contentType: false, 
                  processData: false,
                  success: function (response) {
                     
                      alert('Bài viết đã được đăng thành công!');
+                      form.style.display = "none";
                  },
                  error: function (xhr, status, error) {
                      console.error(xhr.responseText); 
@@ -625,7 +661,7 @@ line-height: 1.6;
    document.addEventListener("DOMContentLoaded", function() {
     var slides = document.querySelectorAll('.slide');
     var currentSlide = 0;
-var slideInterval = setInterval(nextSlide, 5000); 
+    var slideInterval = setInterval(nextSlide, 5000); // Thay đổi thời gian chuyển slide ở đây
 
     function nextSlide() {
         slides[currentSlide].classList.remove('active');

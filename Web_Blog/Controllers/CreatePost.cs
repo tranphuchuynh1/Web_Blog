@@ -1,6 +1,6 @@
-﻿ using Microsoft.AspNetCore.Mvc;
-    using Web_Blog.Data;
-    using Web_Blog.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Web_Blog.Data;
+using Web_Blog.Models;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Diagnostics;
@@ -21,50 +21,50 @@ namespace Web_Blog.Controllers
 
             if (ModelState.IsValid)
             {
-                // Kiểm tra xem người dùng đã đăng nhập chưa
-                if (User.Identity.IsAuthenticated)
+
+                int? userId = HttpContext.Session.GetInt32("idUser");
+
+                Post post = new Post
                 {
-                    // Lấy ID của người dùng hiện tại
-                    int userId = int.Parse(User.Identity.Name); // Giả sử ID người dùng được lưu trong Name của Identity
+                    Category = Category,
+                    Title = Title,
+                    Content = Content,
+                    CreatedAt = DateTime.Now,
+                    idUser = userId.Value
+                };
+                if (ImageURL != null && ImageURL.Length > 0)
+                {
+                    string fileName = Category + Path.GetExtension(ImageURL.FileName);
+                    string filePath = @"wwwroot\ProductImages\" + fileName;
 
 
-                    var post = new Post
+                    var directoryLocation = Path.Combine(Directory.GetCurrentDirectory(), filePath);
+                    FileInfo file = new FileInfo(directoryLocation);
+
+                    var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), filePath);
+                    using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))
                     {
-                        UserID = userId,
-                        Category = Category,
-                        Title = Title,
-                        Content = Content,
-                        CreatedAt = DateTime.Now
-                    };
-                    if (ImageURL != null && ImageURL.Length > 0)
-                    {
-                        // Lưu trữ ảnh vào thư mục và lấy đường dẫn của ảnh
-                        string uploadsFolder = Path.Combine(_environment.WebRootPath, "upload");
-                        string uniqueFileName = Guid.NewGuid().ToString() + "_" + ImageURL.FileName;
-                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                        using (var fileStream = new FileStream(filePath, FileMode.Create))
-                        {
-                            ImageURL.CopyTo(fileStream);
-                        }
-                        post.ImageURL = "~/upload/" + uniqueFileName;
+                        ImageURL.CopyTo(fileStream);
                     }
-                    _db.Posts.Add(post);
-                    _db.SaveChanges();
-                 
-                    // Điều hướng người dùng đến trang hiển thị bài viết đã đăng
-                    return RedirectToAction("Index", "Account");
+                    var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}{HttpContext.Request.PathBase.Value}";
+                    post.ImageURL = baseUrl + "/ProductImages/" + fileName;
                 }
-                else
-                {
+                _db.Posts.Add(post);
+                _db.SaveChanges();
 
-                    return RedirectToAction("Login", "Account");
-                }
+                // Điều hướng người dùng đến trang hiển thị bài viết đã đăng
+                return RedirectToAction("Index", "Account");
+            }
+            else
+            {
+
+                return RedirectToAction("Login", "Account");
             }
 
-            // Nếu dữ liệu không hợp lệ, hiển thị form đăng bài viết lại với thông báo lỗi
-            return View("_CreatePostPartial");
         }
 
+
     }
+
+
 }
-    

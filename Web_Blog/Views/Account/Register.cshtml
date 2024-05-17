@@ -53,6 +53,7 @@
         body, html {
             margin: 0;
             padding: 0;
+            font-style: italic; /* Chữ nghiêng */
             height: 100%;
         }
 
@@ -70,6 +71,51 @@
 
         .login-form {
             /* CSS cho form đăng nhập */
+        }
+
+        .card {
+            border-radius:8px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border:2px solid grey;
+        }
+
+        .card-body {
+            padding: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-rounded {
+            border-radius: 20px;
+        }
+
+        input.form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        label {
+            width: 100%;
         }
     </style>
 </head>
@@ -90,13 +136,13 @@
                 <div class="card-body">
                     <div class="form-group">
                         @Html.LabelFor(m => m.username)
-                        @Html.TextBoxFor(m => m.username, "", new { @class = "form-control", @placeholder = "Tên người dùng" })
+                        @Html.TextBoxFor(m => m.username, "", new { @class = "form-control", @placeholder = "Name..." })
                         @Html.ValidationMessageFor(m => m.username, "", new { @class = "badge badge-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(m => m.Email)
-                        @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
+                        @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email..." })
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "badge badge-danger" })
                         @if (ViewBag.error != null)
                         {
@@ -105,17 +151,19 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Password)
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Mật khẩu" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "pasword..." })
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge badge-danger" })
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.ConfirmPassword)
-                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Xác nhận mật khẩu" })
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "confirmpassword..." })
                         @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "badge badge-danger" })
                     </div>
-                    <div class="form-group">
-                        <input  type="submit" name="submit" class="btn btn-danger" value="Register" />
-                    </div>
+                        <div class="form-group text-center">
+                            <!-- Thêm lớp text-center để căn giữa -->
+                            <input type="submit" name="submit" class="btn btn-danger btn-rounded font-italic" value="Register" /> 
+                        </div>
+
                 </div>
             </div>
         }
