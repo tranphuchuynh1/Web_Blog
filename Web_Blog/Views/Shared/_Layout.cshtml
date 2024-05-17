@@ -606,7 +606,6 @@ line-height: 1.6;
             }
         });
 
-
 $(document).ready(function () {
     $("#post").click(function (event) {  
         event.preventDefault(); // Ngăn chặn form submit thông thường
@@ -638,27 +637,28 @@ $(document).ready(function () {
                     $("#userInput").val('');
                     $("#uploadFile").val('');
                     form.style.display = "none";
-                  var newPostHtml = `
-                            <div class="post">
-                                <div class="post-header">
-                                    <img src="/imgbyHuynh/anh-2.jpg" alt="Profile Picture">
-                                    <div class="post-header-info">
-                                        <h3 class="category">${response.username}</h3>
-                                        <p>Ngày đăng: ${new Date().toLocaleString()}</p>
-                                    </div>
+                    var newPostHtml = `
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="/imgbyHuynh/anh-2.jpg" alt="Profile Picture">
+                                <div class="post-header-info">
+                                    <h3 class="category">${response.username}</h3>
+                                    <p>Ngày đăng: ${new Date().toLocaleString()}</p>
                                 </div>
-                                <div class="post-content">
-                                    <h2 class="title">${tieude}</h2>
-                                    <p>${userInput}</p>
-                                    ${response.imageUrl ? `<img style="width: 464px; height: 248px;" src="${response.imageUrl}" alt="Post Image" />` : ''}
-                                </div>
-                                <div class="post-actions">
-                                    <button class="like-btn">Like</button>
-                                    <button class="comment-btn">Comment</button>
-                                    <button class="share-btn">Share</button>
-                                </div>
-                            </div>`;
-                        $("#newPosts").append(newPostHtml);
+                            </div>
+                            <div class="post-content">
+                                <h2 class="title">${tieude}</h2>
+                                <p>${userInput}</p>
+                                ${response.imageBase64 ? `<img style="width: 464px; height: 248px;" src="data:image/jpeg;base64,${response.imageBase64}" alt="Post Image" />` : ''}
+                                ${response.imageUrl ? `<img style="width: 464px; height: 248px;" src="${response.imageUrl}" alt="Post Image" />` : ''}
+                            </div>
+                            <div class="post-actions">
+                                <button class="like-btn">Like</button>
+                                <button class="comment-btn">Comment</button>
+                                <button class="share-btn">Share</button>
+                            </div>
+                        </div>`;
+                    $("#newPosts").append(newPostHtml);
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText); 

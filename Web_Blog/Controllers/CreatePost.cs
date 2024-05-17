@@ -63,7 +63,7 @@ namespace Web_Blog.Controllers
                 _db.SaveChanges();
 
                 // Điều hướng người dùng đến trang hiển thị bài viết đã đăng
-                return Json(new { success = true, imageUrl = post.ImageURL, category = post.Category, title = post.Title, content = post.Content, createdAt = post.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss"), username = userName });
+                return Json(new { success = true, imageUrl = post.ImageURL, imageBase64 = post.ImageBase64, category = post.Category, title = post.Title, content = post.Content, createdAt = post.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss"), username = userName });
             }
             else
             {
