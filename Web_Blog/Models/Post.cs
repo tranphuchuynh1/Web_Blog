@@ -19,7 +19,7 @@ namespace Web_Blog.Models
 
         public string? ImageURL { get; set; }
         public string ImageBase64 { get; set; }
-
+        public string PostedBy { get; set; }
         public DateTime CreatedAt { get; set; }
 
         // Khai báo quan hệ với bảng Users

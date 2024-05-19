@@ -9,6 +9,7 @@ using Web_Blog.Models.Interfaces;
 using Web_Blog.Models.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using NuGet.Protocol.Core.Types;
 namespace Web_Blog.Controllers
 {
 
@@ -42,6 +43,45 @@ namespace Web_Blog.Controllers
                 return sb.ToString();
             }
         }
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var post = _db.Posts.FirstOrDefault(p => p.PostID == id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            return View(post);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Post updatedPost)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingPost = _db.Posts.FirstOrDefault(p => p.PostID == updatedPost.PostID);
+                if (existingPost == null)
+                {
+                    return NotFound();
+                }
+
+                // Cập nhật thông tin bài viết từ updatedPost
+                existingPost.Category = updatedPost.Category;
+                existingPost.Title = updatedPost.Title;
+                existingPost.Content = updatedPost.Content;
+                existingPost.ImageBase64 = updatedPost.ImageBase64;
+                existingPost.ImageURL = updatedPost.ImageURL;
+
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            // Nếu ModelState không hợp lệ, quay lại view chỉnh sửa với dữ liệu hiện tại
+            return View(updatedPost);
+        }
+
         public ActionResult DeleteConfirmed(int id)
         {
             var currentUserId = HttpContext.Session.GetInt32("idUser");

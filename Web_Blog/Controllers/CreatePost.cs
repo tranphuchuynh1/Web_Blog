@@ -40,12 +40,13 @@ namespace Web_Blog.Controllers
                     Title = Title,
                     Content = Content,
                     CreatedAt = CreatedAt,
-                    idUser = userId.Value
+                    idUser = userId.Value,
+                    PostedBy = userName 
                 };
 
 
                 if (ImageURL != null && ImageURL.Length >0)
-        {
+               {
                     // Mã hóa ảnh thành chuỗi Base64
                     using (var memoryStream = new MemoryStream())
                     {
@@ -70,5 +71,36 @@ namespace Web_Blog.Controllers
                 return Json(new { success = false, message = "Model state is invalid." });
             }
         }
+        [HttpPost]
+        public ActionResult Update(int postId, string category, string title, string content, IFormFile imageURL)
+        {
+            var postToUpdate = _db.Posts.FirstOrDefault(p => p.PostID == postId);
+            if (postToUpdate == null)
+            {
+                return Json(new { success = false, message = "Post not found." });
+            }
+
+            // Cập nhật thông tin mới cho bài viết
+            postToUpdate.Category = category;
+            postToUpdate.Title = title;
+            postToUpdate.Content = content;
+
+            // Kiểm tra và cập nhật ảnh mới nếu có
+            if (imageURL != null && imageURL.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    imageURL.CopyTo(memoryStream);
+                    byte[] imageBytes = memoryStream.ToArray();
+                    postToUpdate.ImageBase64 = Convert.ToBase64String(imageBytes);
+                }
+            }
+
+            _db.SaveChanges();
+
+            // Trả về thông tin của bài viết đã được cập nhật
+            return RedirectToAction("Index", "Account");
+        }
+
     }
 }

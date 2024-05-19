@@ -1,4 +1,5 @@
-﻿using Web_Blog.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Web_Blog.Data;
 using Web_Blog.Models.Interfaces;
 
 namespace Web_Blog.Models.Services
@@ -12,26 +13,22 @@ namespace Web_Blog.Models.Services
         }
         public IEnumerable<Post> getallpost()
         {
-            return _dbContext.Posts;
+            return _dbContext.Posts.Include(p => p.User) // Include User information
+                                   .Select(p => new Post
+                                   {
+                                       PostID = p.PostID,
+                                       Category = p.Category,
+                                       Title = p.Title,
+                                       Content = p.Content,
+                                       CreatedAt = p.CreatedAt,
+                                       ImageBase64 = p.ImageBase64,
+                                       ImageURL = p.ImageURL,
+                                       idUser = p.idUser,
+                                       PostedBy = p.User != null ? p.User.username : "Unknown"
+                                   })
+                                   .ToList();
         }
-        /*
-        public void Clear(int postId)
-        {
-            var post = _dbContext.Posts.Find(postId);
-            if (post != null)
-            {
-                _dbContext.Posts.Remove(post);
-                _dbContext.SaveChanges();
-            }
-        }
-        public Post? DeleteAuthorById(int id)
-        {
-            var authorDomain = _dbContext.Posts.FirstOrDefault(n => n.PostID == id);
-            if (authorDomain != null)
-            {
-                _dbContext.Posts.Remove(authorDomain);
-                _dbContext.SaveChanges();
-            }
-            return null;*/
+
+
     }
 }

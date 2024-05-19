@@ -649,8 +649,8 @@ $(document).ready(function () {
                             <div class="post-content">
                                 <h2 class="title">${tieude}</h2>
                                 <p>${userInput}</p>
-                                ${response.imageBase64 ? `<img style="width: 464px; height: 248px;" src="data:image/jpeg;base64,${response.imageBase64}" alt="Post Image" />` : ''}
-                                ${response.imageUrl ? `<img style="width: 464px; height: 248px;" src="${response.imageUrl}" alt="Post Image" />` : ''}
+                                ${response.imageBase64 ? `<img style="max-width: 100%;   height: auto;display: block; margin: 0 auto;" src="data:image/jpeg;base64,${response.imageBase64}" alt="Post Image" />` : ''}
+                                ${response.imageUrl ? `<img style="max-width: 100%;   height: auto;display: block; margin: 0 auto;" src="${response.imageUrl}" alt="Post Image" />` : ''}
                             </div>
                             <div class="post-actions">
                                 <button class="like-btn">Like</button>

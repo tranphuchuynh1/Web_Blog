@@ -16,7 +16,10 @@ namespace Web_Blog.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("Users");
-           
+            modelBuilder.Entity < Post > ()
+            .HasOne(p => p.User)
+            .WithMany(u =>  u.Posts)
+            .HasForeignKey(p => p.idUser);
 
             base.OnModelCreating(modelBuilder);
 

@@ -194,7 +194,7 @@
                                         <div class="post-header">
                                             <img src="/imgbyHuynh/anh-2.jpg" alt="Profile Picture">
                                             <div class="post-header-info">
-                                                <h3 class="category">@ViewBag.username</h3>
+                                                <h3 class="category">@post.PostedBy</h3>
                                                 <p>Ngày đăng: @post.CreatedAt.ToString()</p>
 
                                             </div>
@@ -203,8 +203,14 @@
                                             </div>
                                             <ul class="dropdown-menu1">
                                                 <li>
-                                                    <a asp-area="" asp-controller="Account" asp-action=""> <i class="fa-solid fa-pen-to-square"></i> Edit Post</a>
+                                                    @if (HttpContextAccessor.HttpContext.Session.GetInt32("idUser") == post.idUser)
+                                                    {
+                                                        <a asp-controller="Account" asp-action="Edit" asp-route-id="@post.PostID">
+                                                            <i class="fa-solid fa-pen-to-square"></i> Edit Post
+                                                        </a>
+                                                    }
                                                 </li>
+
 
                                                 <li>
                                                     @if (HttpContextAccessor.HttpContext.Session.GetInt32("idUser") == post.idUser)
@@ -216,20 +222,22 @@
                                                 </li>
                                             </ul>
                                         </div>
+                                        <hr />
                                         <div class="post-content">
                                             <h2 class="title">@post.Title</h2>
                                             <p>@post.Content</p>
                                             @if (!string.IsNullOrEmpty(post.ImageBase64))
                                             {
-                                                <img style="width: 464px; height: 248px;" src="data:image/jpeg;base64,@post.ImageBase64" alt="Post Image" />
+                                                <img style=" max-width: 100%;   height: auto;display: block; margin: 0 auto;" src="data:image/jpeg;base64,@post.ImageBase64" alt="Post Image" />
                                             }
                                             else if (!string.IsNullOrEmpty(post.ImageURL))
                                             {
-                                                <img style="width: 464px; height: 248px;" src="@post.ImageURL" alt="Post Image" />
+                                                <img style="max-width: 100%;   height: auto;display: block; margin: 0 auto;" src="@post.ImageURL" alt="Post Image" />
                                             }
 
 
                                         </div>
+                                        <hr />
                                         <div class="post-actions">
                                             <!-- Hiển thị các nút hành động -->
                                             <button class="like-btn">Like</button>

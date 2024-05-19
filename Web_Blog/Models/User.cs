@@ -27,7 +27,7 @@ namespace Web_Blog.Models
         [Required]
         [System.ComponentModel.DataAnnotations.Compare("Password")]
         public string? ConfirmPassword { get; set; }
-     
+        public virtual ICollection<Post> Posts { get; set; }
 
-    }
+}
 }
