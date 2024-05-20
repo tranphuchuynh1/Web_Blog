@@ -7,49 +7,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Basic -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Site Metas -->
-    <title>Blog - Nơi Chia Sẻ Và Kết Nối</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Site Icons -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <!-- Design fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
-
-    <!-- Bootstrap core CSS -->
-    <link href="~/css/bootstrap.css" rel="stylesheet">
-
-
-    <!-- FontAwesome Icons core CSS -->
-    <link href="~/css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- Style CSS -->
-    <link href="~/css/style.css" rel="stylesheet">
-
-    <!-- Responsive styles for this template -->
-    <link href="~/css/responsive.css" rel="stylesheet">
-
-    <!-- Colors for this template -->
-    <link href="~/css/colors.css" rel="stylesheet">
-
-    <!-- Version Garden CSS for this template -->
-    <link href="~/css/version/garden.css" rel="stylesheet">
-
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <style>
         body, html {
             margin: 0;
@@ -70,104 +31,350 @@
             overflow: hidden;
         }
 
-        /* Thêm CSS cho form */
-        .card {
-            width: 400px; 
-            margin: auto;
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Độ mờ của lớp phủ */
+            z-index: -500; /* Đảm bảo lớp phủ nằm trên video nhưng dưới form và text */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+        }
+
+        .form {
+            position: absolute;
+            max-width: 430px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 6px;
+            background: #FFF;
+            margin-top: 70px;
+            margin-left: 10px;
+            z-index: 1; /* Đảm bảo form nằm trên lớp phủ */
+        }
+
+            .form.signup {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+        .forms.show-signup .form.signup {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .forms.show-signup .form.login {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        header {
+            font-size: 28px;
+            font-weight: 600;
+            color: #232836;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 30px;
+        }
+
+        .form .field {
+            position: relative;
+            height: 50px;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 6px;
+        }
+
+        .field input,
+        .field button {
+            height: 100%;
+            width: 100%;
+            border: none;
+            font-size: 16px;
+            font-weight: 400;
+            border-radius: 6px;
+        }
+
+        .field input {
+            outline: none;
+            padding: 0 15px;
+            border: 1px solid #CACACA;
+        }
+
+            .field input:focus {
+                border-bottom-width: 2px;
+            }
+
+        .eye-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #8b8b8b;
+            cursor: pointer;
+            padding: 5px;
+            margin-top: 2px;
+        }
+
+        .field button {
+            color: #fff;
+            background-color: black;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+            .field button:hover {
+                background-color: grey;
+            }
+
+        .form-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .form-link span,
+            .form-link a {
+                font-size: 14px;
+                font-weight: 400;
+                color: #232836;
+            }
+
+        .form a {
+            color: #0171d3;
+            text-decoration: none;
+        }
+
+        .form-content a:hover {
+            text-decoration: underline;
+        }
+
+        .line {
+            position: relative;
+            height: 1px;
+            width: 100%;
+            margin: 36px 0;
+            background-color: #d4d4d4;
+        }
+
+            .line::before {
+                content: 'Or';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #FFF;
+                color: #8b8b8b;
+                padding: 0 15px;
+            }
+
+        .media-options a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        a.facebook {
+            color: #fff;
+            background-color: #4267b2;
+        }
+
+            a.facebook:hover {
+                background-color: #0066CC;
+            }
+
+            a.facebook .facebook-icon {
+                height: 28px;
+                width: 28px;
+                color: #0171d3;
+                font-size: 20px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #fff;
+            }
+
+        .facebook-icon,
+        img.google-img {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+        }
+
+        img.google-img {
+            height: 20px;
+            width: 20px;
+            object-fit: cover;
+        }
+
+        a.google {
+            border: 1px solid #CACACA;
+        }
+
+            a.google span {
+                font-weight: 500;
+                opacity: 0.6;
+                color: #232836;
+            }
+
+        .typing-effect {
+            font-size: 15px;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            color: azure;
+            z-index: 1; /* Đảm bảo text nằm trên lớp phủ */
+            width: 520px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+            z-index: -500;
+        }
+
+        .btn-hover {
+            background: azure;
+            color: black;
+            border: none;
+            position: relative;
+            font-size: 13px;
+            font-weight:bold;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            padding: 15px 35px;
+            cursor: pointer;
+            transition: 800ms ease all;
+            outline: none;
+            margin-top:10px;
             
         }
 
-        .card-header {
-            background-color: rgba(0, 0, 0, 0.7);
-            color:#fff;
-            text-align: center;
-            padding: 10px;
-            border: 3px solid grey;
-        }
+        .btn-hover:hover {
+                
+                color: azure;
+                background:none;
+            }
 
-        .card-body {
-            padding: 20px;
-        }
+        .btn-hover:before, .btn-hover:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 2px;
+                width: 0;
+                background: azure;
+                transition: 400ms ease all;
+            }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .btn-hover:after {
+                right: inherit;
+                top: inherit;
+                left: 0;
+                bottom: 0;
+            }
 
-        label {
-            font-weight: bold;
-        }
-
-        .form-control {
-            border-radius: 10px;
-        }
-
-        .btn-primary {
-            font-style: italic;
-            border-radius: 20px;
-            font-size: 16px; 
-        }
-
-        .card-1 {
-            display: flex;
-            justify-content: center; 
-        }
-
+        .btn-hover:hover:before, .btn-hover:hover:after {
+                width: 100%;
+                transition: 800ms ease all;
+            }
     </style>
 </head>
 
 <body>
     <video autoplay muted loop id="video-background">
-        <source src="/css/upload/quadep.mp4" type="video/mp4">
+        <source src="~/css/upload/back-ground-login.mp4" type="video/mp4">
     </video>
+    <div class="overlay"></div>
 
-    <div style="display:flex;gap:330px">
-        <div style="margin-left:150px;margin-top:220px;">
-            <h1 style="font-weight:bold;color:azure;font-size: 8em;">Blog</h1><br />
-            <h5 style="font-weight:bold;color:cornsilk;">Blog - a place to connect and share with everyone.</h5>
-        </div>
-        <div style="margin-top:100px;opacity:0.8;" class="row justify-content-md-center">
-        <div >
-                <div class="card">
-                    <div style="text-align:center;font-size: 24px;font-weight:bold" class="card-header">
-                    Login
-                </div>
-                    <div class="card-body">
-                    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Email)
-                            @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
+    <div style="display:flex;gap:300px;">
+        <div style="margin-left:190px;margin-top:180px;">
+            <h1 style="font-weight:bold;color:wheat;font-size: 8em;z-index:1;">BLOG</h1>
+            <div class="typing-effect" id="typing-effect"></div>
+            <a style="text-decoration:none" asp-area="" asp-controller="Account" asp-action="Register">
+            <button class="btn-hover">GET STARTED </button>
+            </a>
+            
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const text = "\nBlogging helps you connect and share with people in \nyour life,with interesting moments or creative ideas that \nwill always bring you a great experience....";
+                    const typingElement = document.getElementById('typing-effect');
+                    const typingSpeed = 40; // Tốc độ đánh máy (ms)
 
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Password)
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
-                        </div>
+                    let index = 0;
 
-                        <div class="form-group">
-                            <div class="row justify-content-md-center mt-3">
-                                <div class="col-md-4">
-                                    <div class="card-1">
-                                            <div class="card-body">
-                                            <input type="submit" name="submit" class="btn btn-primary" value="Login" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
+                    function type() {
+                        if (index < text.length) {
+                            typingElement.textContent += text.charAt(index);
+                            index++;
+                            setTimeout(type, typingSpeed);
+                        }
                     }
-                    <hr />
-                    <h5 style="text-align:center;">  <a href="@Url.Action("Register", "Account")">Created an account</a></h5>
+
+                    type();
+                });
+            </script>
+        </div>
+
+        <section class="container forms" style="z-index:1;">
+            <div class="form login">
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-content">
+                        <header style="margin-bottom:40px;"> <center> <img style="border-radius:100px;height:100px;" src="/css/upload/Screenshot 2024-04-25 212607.png" /></center></header>
+
+                        <div class="field input-field">
+                            @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
+                        </div>
+                        <div class="field input-field">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                            <i class='bx bx-hide eye-icon'></i>
+                        </div>
+                        <div class="field button-field">
+                            <button>Login</button>
+                        </div>
+
+                        <div class="form-link">
+                            <span>Did you forget your password? <a href="#" class="link signup-link">Forgot password</a></span>
+                        </div>
+                    </div>
+                }
+                <div class="line"></div>
+                <div class="media-options">
+                    <a class="field facebook" style="text-decoration:none" asp-area="" asp-controller="Account" asp-action="Register">
+                        <span>Register</span>
+                    </a>
                 </div>
+
             </div>
+        </section>
+        <div style="position: fixed; bottom: 15px; left: 15px; z-index: 999;">
+            <i class="fab fa-apple" style="font-size: 30px; color:azure; margin-right: 15px;"></i>
+            <i class="fas fa-headphones-alt" style="font-size: 30px; color:azure; margin-right: 15px;"></i>
+            <i class="fas fa-wifi" style="font-size: 30px; color:azure; margin-right: 15px;"></i>
+            <i class="fas fa-desktop" style="font-size: 30px; color: azure; margin-right: 15px;"></i>
+            <i class="fab fa-internet-explorer" style="font-size: 30px; color: azure;"></i>
+        </div>
         </div>
     </div>
-   
-    </div>
+    
 </body>
-
-
 </html>

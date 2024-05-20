@@ -157,7 +157,11 @@ namespace Web_Blog.Controllers
 
             return View();
         }
+        public ActionResult good()
+        {
 
+            return View();
+        }
 
 
         [HttpPost]
@@ -175,7 +179,7 @@ namespace Web_Blog.Controllers
                     HttpContext.Session.SetString("username", data.username);
                     HttpContext.Session.SetString("Email", data.Email);
                     HttpContext.Session.SetInt32("idUser", data.idUser);
-                    HttpContext.Session.SetString("Avatar", data.Avatar);
+                    
 
                     return RedirectToAction("Index");
 
