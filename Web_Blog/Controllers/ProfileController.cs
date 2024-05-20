@@ -8,23 +8,26 @@ namespace Web_Blog.Controllers
 {
     public class ProfileController : Controller
     {
-
         private readonly WebblogDbContext _db;
-        private readonly IcreatepostRepository _createpostRepository;
-        public ProfileController(WebblogDbContext db, IcreatepostRepository createpostRepository)
+        private readonly IWebHostEnvironment _environment;
+
+        public ProfileController(WebblogDbContext db, IWebHostEnvironment environment)
         {
             _db = db;
-            _createpostRepository = createpostRepository;
+            _environment = environment;
         }
-        public ActionResult PageProfile()
+
+        public IActionResult PageProfile()
         {
             int? userId = HttpContext.Session.GetInt32("idUser");
             string userName = HttpContext.Session.GetString("username");
             string email = HttpContext.Session.GetString("Email");
             string iduser = HttpContext.Session.GetString("idUser");
+            var user = _db.Users.Find(userId);
             ViewBag.UserName = userName;
             ViewBag.EMAIL = email;
             ViewBag.Iduser = iduser;
+            ViewBag.Avatar = user.Avatar;
             if (userId == null)
             {
                 return RedirectToAction("Login");
@@ -37,10 +40,49 @@ namespace Web_Blog.Controllers
 
             ViewBag.UserPosts = userPosts;
             // Gán tên người dùng vào ViewBag để truyền sang view
-        
-            return View();
+
+
+            return View(user);
         }
-      
+
+        [HttpPost]
+        public ActionResult UploadAvatar(IFormFile avatar)
+        {
+            int? userId = HttpContext.Session.GetInt32("idUser");
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var user = _db.Users.Find(userId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            if (avatar != null && avatar.Length > 0)
+            {
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(avatar.FileName);
+                var uploadsFolderPath = Path.Combine(_environment.WebRootPath, "ProductImages");
+
+                // Create directory if it doesn't exist
+                if (!Directory.Exists(uploadsFolderPath))
+                {
+                    Directory.CreateDirectory(uploadsFolderPath);
+                }
+
+                var filePath = Path.Combine(uploadsFolderPath, fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    avatar.CopyTo(fileStream);
+                }
+
+                user.Avatar = "/ProductImages/" + fileName;
+                _db.SaveChanges();
+            }
+
+            return RedirectToAction("PageProfile");
+        }
 
 
     }

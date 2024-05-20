@@ -24,6 +24,7 @@ namespace Web_Blog.Models.Services
                                        ImageBase64 = p.ImageBase64,
                                        ImageURL = p.ImageURL,
                                        idUser = p.idUser,
+                                       UserAvatar = p.User.Avatar,
                                        PostedBy = p.User != null ? p.User.username : "Unknown"
                                    })
                                    .ToList();

@@ -5,6 +5,7 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    var user = Model as Web_Blog.Models.User;
 }
 <style>
     .img-fluid {
@@ -192,7 +193,7 @@
                                 {
                                     <div class="post">
                                         <div class="post-header">
-                                            <img src="/imgbyHuynh/anh-2.jpg" alt="Profile Picture">
+                                            <img src="@post.UserAvatar" alt="Profile Picture">
                                             <div class="post-header-info">
                                                 <h3 class="category">@post.PostedBy</h3>
                                                 <p>Ngày đăng: @post.CreatedAt.ToString()</p>
@@ -354,7 +355,7 @@
                         </div><!-- end link-widget -->
                     </div><!-- end widget -->
                 </div><!-- end sidebar -->
-            </div><!-- end col -->  */
+            </div><!-- end col --> 
         </div><!-- end row -->
     </div><!-- end container -->
 </section>
