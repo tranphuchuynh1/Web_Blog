@@ -157,11 +157,7 @@ namespace Web_Blog.Controllers
 
             return View();
         }
-        public ActionResult good()
-        {
-
-            return View();
-        }
+      
 
 
         [HttpPost]

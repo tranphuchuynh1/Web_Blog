@@ -333,7 +333,7 @@
 
         <section class="container forms" style="z-index:1;">
             <div class="form login">
-                @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     <div class="form-content">
@@ -346,15 +346,19 @@
                         <div class="field input-field">
                             @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email..." })
                             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "badge badge-danger" })
+                            @if (ViewBag.error != null)
+                            {
+                                <span class="badge badge-danger">@ViewBag.error</span>
+                            }
                             <i class='bx bx-hide eye-icon'></i>
                         </div>
                         <div class="field input-field">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "pasword..." })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password..." })
                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge badge-danger" })
                             <i class='bx bx-hide eye-icon'></i>
                         </div>
                         <div class="field input-field">
-                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "confirmpassword..." })
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirmpassword..." })
                             @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "badge badge-danger" })
                             <i class='bx bx-hide eye-icon'></i>
                         </div>
@@ -374,7 +378,7 @@
             <i class="fab fa-internet-explorer" style="font-size: 30px; color: azure;"></i>
         </div>
     </div>
-    </div>
+    
 
 </body>
 </html>
